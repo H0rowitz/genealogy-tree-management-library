@@ -73,7 +73,7 @@ void delete_tree_from_node(generic_type current_point) {
 void display(generic_type member) {
     printf("Current member: %s\n", member->current->name); 
     for(unsigned int i = 0; i < 2; ++i) 
-        printf("parent %d: %s, nb enfants : %lu\n", i, member->parents[i]->current->name, member->parents[i]->nbChildren); 
+        printf("parent %d: %s, nb enfants : %zu\n", i, member->parents[i]->current->name, member->parents[i]->nbChildren); 
 }
 
 void displayChild(generic_type parent) {

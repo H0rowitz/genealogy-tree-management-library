@@ -1,0 +1,29 @@
+CC = gcc
+EXEC = programme
+FLAG = -std=c99
+BUILD_DIR = build
+SOURCE_DIR = src
+HEADER_DIR = $(SOURCE_DIR)/header
+
+all : $(EXEC)
+
+$(EXEC) : $(BUILD_DIR)/main.o $(BUILD_DIR)/node.o $(BUILD_DIR)/tree.o $(BUILD_DIR)/mcduck.o
+	$(CC) -o $(EXEC) $^ $(FLAG)
+
+$(BUILD_DIR)/mcduck.o : $(SOURCE_DIR)/mcduck.c 
+	$(CC) -o $@ -c $< $(FLAG)
+
+$(BUILD_DIR)/node.o : $(SOURCE_DIR)/node.c $(HEADER_DIR)/mcduck.h
+	$(CC) -o $@ -c $< $(FLAG)
+
+$(BUILD_DIR)/tree.o : $(SOURCE_DIR)/tree.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h
+	$(CC) -o $@ -c $< $(FLAG)
+
+$(BUILD_DIR)/main.o : $(SOURCE_DIR)/main.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h $(HEADER_DIR)/tree.h
+	$(CC) -o $@ -c $< $(FLAG)
+
+clean : 
+	-del $(BUILD_DIR)
+
+mrproper : clean
+	-del $(EXEC).exe
