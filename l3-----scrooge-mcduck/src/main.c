@@ -1,4 +1,3 @@
-
 #include "header/mcduck.h"
 #include "header/node.h"
 #include "header/tree.h"
@@ -16,7 +15,6 @@ bool isRootMember(generic_type member) {
 }
 
 int main(int argc, char* argv[]) {
-
     Duck root_A = createDuck("A", ",", ",");
     Duck root_B = createDuck("B", ",", ",");
     Duck enfant_C = createDuck("enfant_AB_C", ",", ",");
