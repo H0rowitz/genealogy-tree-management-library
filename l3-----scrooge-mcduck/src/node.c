@@ -13,7 +13,7 @@ generic_type createNode(Duck duck) {
 }
 
 static void _addChildren(generic_type parent, generic_type child) {
-    size_t size = ++parent->nbChildren; 
+    size_t size = ++parent->nbChildren;
     parent->children = realloc(parent->children, sizeof(generic_type) * size);
     if (parent->children == NULL) exit(1);
     parent->children[size-1] = child;
@@ -60,13 +60,19 @@ void show(generic_type current_point) {
     printf("Déscendance:\n");
     printDescendance(current_point); 
 }
+
+void _destruct_node(generic_type node) {
+    free(node->current);
+    free(node->children);
+    free(node);
+}
  
 void delete_tree_from_node(generic_type current_point) {
     if (current_point == NULL) return; 
     for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
         delete_tree_from_node(current_point->children[i]);
     }
-    free(current_point);  
+    _destruct_node(current_point); 
 }
 
 // HELPER FUNCTIONS 
