@@ -47,6 +47,8 @@ int main(int argc, char* argv[]) {
     printf("\n==GLOBAL SEARCH PART==\n");
     _globalSearch(tree, root_A, isRootMember, is_same, enfant_C); 
 
+    show(tree->root);
+
     _delete_from_node(tree, root_A); 
 
     return 0;

@@ -49,16 +49,19 @@ void printDescendance(generic_type current_point) {
 }
 
 void show(generic_type current_point) {
-    if (current_point->parents[0] != NULL){
-        printf("Frères et soeurs: \n");
-        for (unsigned int i = 0; i < current_point->parents[0]->nbChildren; ++i){
-            printf("* nom: %s\n", current_point->parents[0]->children[i]->current->name);
+    if(current_point->current != NULL ) {
+        printf("%s ", current_point->current->name);
+
+        printf("(");
+        for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
+            if(current_point->children[i]->nbChildren == 0) {
+                printf("%s%s", current_point->children[i]->current->name, i+1 == current_point->nbChildren ? "" : ", ");
+            } else {
+                show(current_point->children[i]);
+            }
         }
-    } else {
-        printf("%s has no siblings.\n", current_point->current->name); 
+        printf(")");
     }
-    printf("Déscendance:\n");
-    printDescendance(current_point); 
 }
 
 void _destruct_node(generic_type node) {
