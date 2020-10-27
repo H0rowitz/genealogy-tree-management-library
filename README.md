@@ -8,6 +8,10 @@ $ gcc -std=c99 -Wall -pedantic src/main.c -o main.out src/mcduck.c src/node.c sr
 ```sh
 $ ./main.out
 ```
+Create a duck
+```c
+Duck createDuck(char*, char*, char*);
+```
 Initiate the family members tree from root node
 ```c
 Tree initTree(Duck);
