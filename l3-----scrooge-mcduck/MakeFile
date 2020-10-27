@@ -10,17 +10,20 @@ all : $(EXEC)
 $(EXEC) : $(BUILD_DIR)/main.o $(BUILD_DIR)/node.o $(BUILD_DIR)/tree.o $(BUILD_DIR)/mcduck.o
 	$(CC) -o $(EXEC) $^ $(FLAG)
 
-$(BUILD_DIR)/mcduck.o : $(SOURCE_DIR)/mcduck.c 
+$(BUILD_DIR)/mcduck.o : $(SOURCE_DIR)/mcduck.c $(BUILD_DIR)
 	$(CC) -o $@ -c $< $(FLAG)
 
-$(BUILD_DIR)/node.o : $(SOURCE_DIR)/node.c $(HEADER_DIR)/mcduck.h
+$(BUILD_DIR)/node.o : $(SOURCE_DIR)/node.c $(HEADER_DIR)/mcduck.h $(BUILD_DIR)
 	$(CC) -o $@ -c $< $(FLAG)
 
-$(BUILD_DIR)/tree.o : $(SOURCE_DIR)/tree.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h
+$(BUILD_DIR)/tree.o : $(SOURCE_DIR)/tree.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h $(BUILD_DIR)
 	$(CC) -o $@ -c $< $(FLAG)
 
-$(BUILD_DIR)/main.o : $(SOURCE_DIR)/main.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h $(HEADER_DIR)/tree.h
+$(BUILD_DIR)/main.o : $(SOURCE_DIR)/main.c $(HEADER_DIR)/mcduck.h $(HEADER_DIR)/node.h $(HEADER_DIR)/tree.h $(BUILD_DIR)
 	$(CC) -o $@ -c $< $(FLAG)
+
+$(BUILD_DIR) :
+	mkdir $(BUILD_DIR)
 
 clean : 
 	-del $(BUILD_DIR)
