@@ -29,7 +29,7 @@ void _addSibling(Tree tree, Duck sibling, Duck new_sibling) {
 
 void _addChild(Tree tree, Duck parent1, Duck parent2, Duck child) {  
     generic_type new_parent1 = getMemberByName(tree, parent1); 
-    generic_type new_parent2 = getMemberByName(tree, parent2); 
+    generic_type new_parent2 = parent2 == NULL ? NULL : getMemberByName(tree, parent2); 
     generic_type new_child = createNode(child);
     addChild(new_parent1, new_parent2, new_child); 
     tree->nodes = realloc(tree->nodes, sizeof(generic_type) * ++(tree->nbNode));
