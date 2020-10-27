@@ -2,9 +2,11 @@
 #include "header/node.h"
 #include "header/tree.h"
 
-bool isByName(generic_type member) {
+/*
+bool isByName(generic_type member, char* name) {
     return strcmp(member->current->name, "femme_D") == 0; 
 }
+*/
 
 bool isRootMember(generic_type member) {
     return ( (member->nbChildren > 0) 
@@ -46,10 +48,10 @@ int main(int argc, char* argv[]) {
     _show(tree, root_A); 
 
     printf("\n==SEARCH PART==\n");
-    _search(tree, root_B, isByName); 
+    _search(tree, root_B, is_same, enfant_C); 
 
     printf("\n==GLOBAL SEARCH PART==\n");
-    _globalSearch(tree, root_A, isRootMember, isByName); 
+    _globalSearch(tree, root_A, isRootMember, is_same, enfant_C); 
 
     _delete_from_node(tree, root_A); 
 

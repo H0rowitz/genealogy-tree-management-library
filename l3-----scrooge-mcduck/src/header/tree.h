@@ -63,7 +63,7 @@ family_member getMemberByName(Tree, Duck);
  * \param canard 
  * \param function la fonction de recherche TODO 
 */
-void _search(Tree, Duck, bool(*)(generic_type));
+void _search(Tree, Duck, bool(*)(void*,void*),Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -85,7 +85,7 @@ void _delete_from_node(Tree, Duck);
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-void _globalSearch(Tree, Duck, bool(*)(generic_type), bool(*)(generic_type)); 
+void _globalSearch(Tree, Duck, bool(*)(generic_type), bool(*)(void*,void*), Duck); 
 
 /**
  * fonctions d'output standard 

@@ -45,9 +45,9 @@ void _the_wedding_present(Tree tree, Duck partner1, Duck partner2) {
     tree->nodes[tree->nbNode-1] = new_partner2; 
 }
 
-void _search(Tree tree, Duck duck, bool(*searchFunction)(generic_type)) {
+void _search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other_duck) {
     generic_type _duck = getMemberByName(tree, duck); 
-    search(_duck, searchFunction); 
+    search(_duck, searchFunction, other_duck); 
 }
 
 void _show(Tree tree, Duck duck) {
@@ -61,9 +61,9 @@ void _delete_from_node(Tree tree, Duck duck) {
 }
 
 void _globalSearch(Tree tree, Duck duck, 
-    bool(*searchRoot)(generic_type), bool(*searchNode)(generic_type)) {
+    bool(*searchRoot)(generic_type), bool(*searchNode)(void*,void*), Duck other_duck) {
     generic_type _duck = getMemberByName(tree, duck); 
-    globalSearch(_duck, searchRoot, searchNode); 
+    globalSearch(_duck, searchRoot, searchNode, other_duck); 
 }   
 
 void displayAttributsNodes(Tree tree) {

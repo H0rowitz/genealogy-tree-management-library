@@ -1,0 +1,85 @@
+Found 10 issues
+
+src/mcduck.c:5: error: NULL_DEREFERENCE
+  pointer `duck` last assigned on line 4 could be null and is dereferenced at line 5, column 5.
+  3.   Duck createDuck(char* name, char* firstname, char* surname){
+  4.       Duck duck = malloc(sizeof(struct duck)); 
+  5. >     duck->name = name;
+  6.       duck->firstname = firstname; 
+  7.       duck->surname = surname; 
+
+src/node.c:6: error: NULL_DEREFERENCE
+  pointer `member` last assigned on line 5 could be null and is dereferenced at line 6, column 5.
+  4.   generic_type createNode(Duck duck) {
+  5.       generic_type member = malloc(sizeof(struct node));    
+  6. >     member->current = duck;
+  7.       member->parents[0] = NULL; 
+  8.       member->parents[1] = NULL; 
+
+src/tree.c:10: error: NULL_DEREFERENCE
+  pointer `newTree->nodes` last assigned on line 7 could be null and is dereferenced at line 10, column 5.
+  8.       newTree->nbNode = 1;
+  9.       newTree->root = root_duck;
+  10. >     newTree->nodes[newTree->nbNode-1] = root_duck; 
+  11.       return newTree;
+  12.   } 
+
+src/tree.c:7: error: NULL_DEREFERENCE
+  pointer `newTree` last assigned on line 6 could be null and is dereferenced at line 7, column 5.
+  5.       generic_type root_duck = createNode(duck); 
+  6.       Tree newTree = malloc(sizeof(struct tree)); 
+  7. >     newTree->nodes = malloc(sizeof(generic_type));
+  8.       newTree->nbNode = 1;
+  9.       newTree->root = root_duck;
+
+src/tree.c:25: error: NULL_DEREFERENCE
+  pointer `_sibling` last assigned on line 24 could be null and is dereferenced at line 25, column 46.
+  23.   void _addSibling(Tree tree, Duck sibling, Duck new_sibling) {
+  24.       generic_type _sibling = getMemberByName(tree, sibling);
+  25. >     Duck new_parent1 = getMemberByName(tree, _sibling->parents[0]->current)->current;
+  26.       Duck new_parent2 = getMemberByName(tree, _sibling->parents[1]->current)->current;
+  27.       _addChild(tree, new_parent1, new_parent2, new_sibling); 
+
+src/tree.c:34: error: NULL_DEREFERENCE
+  pointer `new_parent1` last assigned on line 31 could be null and is dereferenced by call to `addChild()` at line 34, column 5.
+  32.       generic_type new_parent2 = getMemberByName(tree, parent2); 
+  33.       generic_type new_child = createNode(child);
+  34. >     addChild(new_parent1, new_parent2, new_child); 
+  35.       tree->nodes = realloc(tree->nodes, sizeof(generic_type) * ++(tree->nbNode));
+  36.       tree->nodes[tree->nbNode-1] = new_child; 
+
+src/tree.c:34: error: NULL_DEREFERENCE
+  pointer `new_parent2` last assigned on line 32 could be null and is dereferenced by call to `addChild()` at line 34, column 5.
+  32.       generic_type new_parent2 = getMemberByName(tree, parent2); 
+  33.       generic_type new_child = createNode(child);
+  34. >     addChild(new_parent1, new_parent2, new_child); 
+  35.       tree->nodes = realloc(tree->nodes, sizeof(generic_type) * ++(tree->nbNode));
+  36.       tree->nodes[tree->nbNode-1] = new_child; 
+
+src/tree.c:43: error: NULL_DEREFERENCE
+  pointer `new_partner1` last assigned on line 42 could be null and is dereferenced by call to `the_wedding_present()` at line 43, column 5.
+  41.       generic_type new_partner2 = createNode(partner2); 
+  42.       generic_type new_partner1 = getMemberByName(tree, partner1);  
+  43. >     the_wedding_present(new_partner1, new_partner2); 
+  44.       tree->nodes = realloc(tree->nodes, sizeof(generic_type) * ++(tree->nbNode));
+  45.       tree->nodes[tree->nbNode-1] = new_partner2; 
+
+src/tree.c:45: error: NULL_DEREFERENCE
+  pointer `tree->nodes` last assigned on line 44 could be null and is dereferenced at line 45, column 5.
+  43.       the_wedding_present(new_partner1, new_partner2); 
+  44.       tree->nodes = realloc(tree->nodes, sizeof(generic_type) * ++(tree->nbNode));
+  45. >     tree->nodes[tree->nbNode-1] = new_partner2; 
+  46.   }
+  47.   
+
+src/tree.c:55: error: NULL_DEREFERENCE
+  pointer `_duck` last assigned on line 54 could be null and is dereferenced by call to `show()` at line 55, column 5.
+  53.   void _show(Tree tree, Duck duck) {
+  54.       generic_type _duck = getMemberByName(tree, duck); 
+  55. >     show(_duck); 
+  56.   }
+  57.   
+
+Summary of the reports
+
+  NULL_DEREFERENCE: 10

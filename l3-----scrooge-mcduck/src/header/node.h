@@ -52,7 +52,7 @@ void the_wedding_present(generic_type, generic_type);
  * \param canard le canard a partir du qu'elle on commence la recherche
  * \param function la fonction de recherche TODO 
 */
-void search(generic_type, bool(*)(generic_type));
+void search(generic_type, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -71,7 +71,7 @@ void delete_tree_from_node(generic_type);
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-void globalSearch(generic_type, bool(*)(generic_type), bool(*)(generic_type));  
+void globalSearch(generic_type, bool(*)(generic_type), bool(*)(void*,void*), Duck);  
 
 /*!
  * Helper functions 
