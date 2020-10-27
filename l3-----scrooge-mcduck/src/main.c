@@ -2,12 +2,6 @@
 #include "header/node.h"
 #include "header/tree.h"
 
-/*
-bool isByName(generic_type member, char* name) {
-    return strcmp(member->current->name, "femme_D") == 0; 
-}
-*/
-
 bool isRootMember(generic_type member) {
     return ( (member->nbChildren > 0) 
     && 
