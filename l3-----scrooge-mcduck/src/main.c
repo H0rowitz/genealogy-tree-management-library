@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
     Tree tree = initTree(root_A); 
 
      _the_wedding_present(tree, root_A, root_B); 
-    _addChild(tree, root_A, NULL, enfant_C); 
+    _addChild(tree, root_A, root_B, enfant_C); 
     
     _addSibling(tree, enfant_C, enfant_D); 
 
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     _globalSearch(tree, root_A, isRootMember, is_same, enfant_C); 
     
     show(tree->root);
-
+    createGraphViz(tree);
     _delete_from_node(tree, root_A); 
 
     return 0;

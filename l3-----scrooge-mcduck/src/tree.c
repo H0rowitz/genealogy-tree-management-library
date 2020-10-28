@@ -87,3 +87,20 @@ void displayAttributsNodes(Tree tree) {
         }
     }
 }
+
+void createGraphViz(Tree tree) {
+    FILE *file = fopen("graph.dot", "w+");
+
+    if(file == NULL) {
+        exit(EXIT_FAILURE);
+    }
+
+    fprintf(file, "graph {\n");
+    for(unsigned int i = 0; i < tree->nbNode; ++i) {
+        for(unsigned int ii = 0; ii < tree->nodes[i]->nbChildren; ++ii) {
+            fprintf(file, "\t%s -- %s;\n", tree->nodes[i]->current->name, tree->nodes[i]->children[ii]->current->name);
+        }
+    }
+    fprintf(file, "}");
+    fclose(file);
+}

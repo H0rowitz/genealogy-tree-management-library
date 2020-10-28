@@ -92,4 +92,6 @@ void _globalSearch(Tree, Duck, bool(*)(generic_type), bool(*)(void*,void*), Duck
 */
 void displayAttributsNodes(Tree); 
 
+void createGraphViz(Tree tree);
+
 #endif
