@@ -37,18 +37,18 @@ int main(int argc, char* argv[]) {
     _the_wedding_present(tree, enfant_G, femme_H); 
     _addChild(tree, enfant_G, femme_H, enfant_I); 
 
+    printf("\n==STRUCTURE OF THE TREE==\n");
     displayAttributsNodes(tree); 
 
     printf("\n==SHOW PART==\n"); 
-    _show(tree, root_A); 
+    _show(tree, root_A); printf("\n");
 
     printf("\n==SEARCH PART==\n");
     _search(tree, root_B, is_same, enfant_C); 
 
     printf("\n==GLOBAL SEARCH PART==\n");
-    _globalSearch(tree, root_A, isRootMember, is_same, enfant_C); 
+    _globalSearch(tree, enfant_D, isRootMember, is_same, enfant_C); 
     
-    show(tree->root);
     createGraphViz(tree);
     
     _delete_from_node(tree, root_A); 

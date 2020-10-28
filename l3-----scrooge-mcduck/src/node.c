@@ -40,20 +40,9 @@ void search(generic_type current_point, bool(*searchFunction)(void*,void*), Duck
     }
 }
 
-void printDescendance(generic_type current_point) {
-    for (unsigned int i = 0; i < current_point->nbChildren; ++i) {
-        printf("* nom (père: %s): %s\n", 
-            current_point->current->name,
-            current_point->children[i]->current->name
-        );
-        printDescendance(current_point->children[i]);
-    }
-}
-
 void show(generic_type current_point) {
     if(current_point->current != NULL ) {
         printf("%s ", current_point->current->name);
-
         printf("(");
         for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
             if(current_point->children[i]->nbChildren == 0) {
@@ -63,7 +52,7 @@ void show(generic_type current_point) {
             }
         }
         printf(")");
-    }
+    } 
 }
 
 void _destruct_node(generic_type node) {
@@ -78,23 +67,6 @@ void delete_tree_from_node(generic_type current_point) {
         delete_tree_from_node(current_point->children[i]);
     }
     _destruct_node(current_point); 
-}
-
-// HELPER FUNCTIONS 
-void display(generic_type member) {
-    printf("Current member: %s\n", member->current->name); 
-    for(unsigned int i = 0; i < 2; ++i) 
-        printf("parent %d: %s, nb enfants : %zu\n", i, member->parents[i]->current->name, member->parents[i]->nbChildren); 
-}
-
-void displayChild(generic_type parent) {
-    printf("Current member: %s\n", parent->current->name); 
-    for(unsigned int i = 0; i < parent->nbChildren; ++i) {
-        printf("Children %d: %s\n", 
-            i, 
-            parent->children[i]->current->name
-        );
-    }
 }
 
 /*SEARCH ON GLOBAL TREE :
@@ -115,14 +87,15 @@ void globalSearch(generic_type current_node,
     if(searchRoot(current_node)){
         printf("ROOT MEMBER: %s\n", current_node->current->name);
         search(current_node, searchNode, other_duck); 
-        return; // just need one root 
+        return;
     } 
     // Ne pas rester bloqué dans un root local 
     for(unsigned int i = 0; i < 2; ++i) { 
         if (current_node->parents[i] != NULL) {
             globalSearch(current_node->parents[i], searchRoot, searchNode, other_duck); 
         } else if (current_node->nbChildren > 0) {
-            if (isOrphelin(current_node)) { // repasse par enfant pour atteindre autre parent: not(i)
+            // repasse par enfant pour atteindre autre parent d'indice not(i)
+            if (isOrphelin(current_node)) { 
                 if (current_node->children[0]->parents[not(i)]->parents[0] != NULL 
                     || current_node->children[0]->parents[not(i)]->parents[1] != NULL) {
                     globalSearch(current_node->children[0]->parents[not(i)], searchRoot, searchNode, other_duck); 

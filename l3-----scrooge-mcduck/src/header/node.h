@@ -73,10 +73,4 @@ void delete_tree_from_node(generic_type);
 */
 void globalSearch(generic_type, bool(*)(generic_type), bool(*)(void*,void*), Duck);  
 
-/*!
- * Helper functions 
-*/
-void display(generic_type);
-void displayChild(generic_type);
-
 #endif

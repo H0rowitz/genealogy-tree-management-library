@@ -36,7 +36,6 @@ void _addChild(Tree tree, Duck parent1, Duck parent2, Duck child) {
     tree->nodes[tree->nbNode-1] = new_child; 
 }
 
-// forcément avoir un attribut partenaire dans Node sinon inutile 
 void _the_wedding_present(Tree tree, Duck partner1, Duck partner2) {
     generic_type new_partner2 = createNode(partner2); 
     generic_type new_partner1 = getMemberByName(tree, partner1);  
@@ -66,8 +65,22 @@ void _globalSearch(Tree tree, Duck duck,
     globalSearch(_duck, searchRoot, searchNode, other_duck); 
 }   
 
+void createGraphViz(Tree tree) {
+    FILE *file = fopen("graph.dot", "w+");
+    if(file == NULL) exit(EXIT_FAILURE);
+
+    fprintf(file, "graph {\n");
+    for(unsigned int i = 0; i < tree->nbNode; ++i) {
+        for(unsigned int ii = 0; ii < tree->nodes[i]->nbChildren; ++ii) {
+            fprintf(file, "\t%s -- %s;\n", tree->nodes[i]->current->name, tree->nodes[i]->children[ii]->current->name);
+        }
+    }
+    fprintf(file, "}");
+    fclose(file);
+}
+
+// HELPER FUCNTION
 void displayAttributsNodes(Tree tree) {
-    printf("Nodes attributs: \n"); 
     for (size_t i = 0; i < tree->nbNode; ++i) {
         generic_type node = tree->nodes[i]; 
         if (node->parents[0]!=NULL){
@@ -86,21 +99,4 @@ void displayAttributsNodes(Tree tree) {
             );      
         }
     }
-}
-
-void createGraphViz(Tree tree) {
-    FILE *file = fopen("graph.dot", "w+");
-
-    if(file == NULL) {
-        exit(EXIT_FAILURE);
-    }
-
-    fprintf(file, "graph {\n");
-    for(unsigned int i = 0; i < tree->nbNode; ++i) {
-        for(unsigned int ii = 0; ii < tree->nodes[i]->nbChildren; ++ii) {
-            fprintf(file, "\t%s -- %s;\n", tree->nodes[i]->current->name, tree->nodes[i]->children[ii]->current->name);
-        }
-    }
-    fprintf(file, "}");
-    fclose(file);
 }

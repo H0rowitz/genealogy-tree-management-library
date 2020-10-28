@@ -88,10 +88,13 @@ void _delete_from_node(Tree, Duck);
 void _globalSearch(Tree, Duck, bool(*)(generic_type), bool(*)(void*,void*), Duck); 
 
 /**
- * fonctions d'output standard 
+ * generate a .dot file to format a graph of the tree 
 */
-void displayAttributsNodes(Tree); 
-
 void createGraphViz(Tree tree);
+
+/**
+ * output the characteristics of the tree node 
+*/
+void displayAttributsNodes(Tree tree);
 
 #endif

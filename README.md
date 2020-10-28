@@ -48,7 +48,7 @@ at the begining of the file.
 
 ### Current output of the main() function:
 ```bash
-Nodes attributs: 
+==STRUCTURE OF THE TREE==
 0 Name: A			Parents: NULL & NULL
 1 Name: B			Parents: NULL & NULL
 2 Name: enfant_AB_C		Parents: A & B
@@ -60,13 +60,7 @@ Nodes attributs:
 8 Name: enfant_GH_I		Parents: enfant_ED_G & femme_G
 
 ==SHOW PART==
-A has no siblings.
-Déscendance:
-* nom (père: A): enfant_AB_C
-* nom (père: A): enfant_AB_D
-* nom (père: enfant_AB_D): enfant_ED_F
-* nom (père: enfant_AB_D): enfant_ED_G
-* nom (père: enfant_ED_G): enfant_GH_I
+A (enfant_AB_C, enfant_AB_D (enfant_ED_F, enfant_ED_G (enfant_GH_I)))
 
 ==SEARCH PART==
 condition OK: enfant_AB_C
@@ -74,4 +68,9 @@ condition OK: enfant_AB_C
 ==GLOBAL SEARCH PART==
 ROOT MEMBER: A
 condition OK: enfant_AB_C
+ROOT MEMBER: B
+condition OK: enfant_AB_C
 ```
+
+### Graphviz
+![Graphviz rendering (w.r.t 2 root members)](images/graph.png)

@@ -1,0 +1,12 @@
+graph {
+	A -- enfant_AB_C;
+	A -- enfant_AB_D;
+	B -- enfant_AB_C;
+	B -- enfant_AB_D;
+	enfant_AB_D -- enfant_ED_F;
+	enfant_AB_D -- enfant_ED_G;
+	femme_D -- enfant_ED_F;
+	femme_D -- enfant_ED_G;
+	enfant_ED_G -- enfant_GH_I;
+	femme_G -- enfant_GH_I;
+}
