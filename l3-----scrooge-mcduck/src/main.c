@@ -24,8 +24,8 @@ int main(int argc, char* argv[]) {
     Duck enfant_I = createDuck("enfant_GH_I", ",", ",");
     
     Tree tree = initTree(root_A); 
-
-     _the_wedding_present(tree, root_A, root_B); 
+    
+    _the_wedding_present(tree, root_A, root_B); 
     _addChild(tree, root_A, root_B, enfant_C); 
     
     _addSibling(tree, enfant_C, enfant_D); 
@@ -50,6 +50,7 @@ int main(int argc, char* argv[]) {
     
     show(tree->root);
     createGraphViz(tree);
+    
     _delete_from_node(tree, root_A); 
 
     return 0;
