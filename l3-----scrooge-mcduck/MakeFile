@@ -28,5 +28,8 @@ $(BUILD_DIR) :
 clean : 
 	-del $(BUILD_DIR)
 
-mrproper : clean
+graphclean : 
+	-del graph.dot
+
+mrproper : clean graphclean
 	-del $(EXEC).exe

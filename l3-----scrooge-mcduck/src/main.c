@@ -24,9 +24,10 @@ int main(int argc, char* argv[]) {
     Duck enfant_I = createDuck("enfant_GH_I", ",", ",");
     
     Tree tree = initTree(root_A); 
-
+    
     _the_wedding_present(tree, root_A, root_B); 
     _addChild(tree, root_A, root_B, enfant_C); 
+    
     _addSibling(tree, enfant_C, enfant_D); 
 
     _the_wedding_present(tree, enfant_D, femme_E); 
@@ -46,7 +47,10 @@ int main(int argc, char* argv[]) {
 
     printf("\n==GLOBAL SEARCH PART==\n");
     _globalSearch(tree, root_A, isRootMember, is_same, enfant_C); 
-
+    
+    show(tree->root);
+    createGraphViz(tree);
+    
     _delete_from_node(tree, root_A); 
 
     return 0;
