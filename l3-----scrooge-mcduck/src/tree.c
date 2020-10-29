@@ -25,6 +25,7 @@ void _addSibling(Tree tree, Duck sibling, Duck new_sibling) {
     generic_type _sibling = getMemberByAttributs(tree, sibling);
     Duck new_parent1 = getMemberByAttributs(tree, _sibling->parents[0]->current)->current;
     Duck new_parent2 = getMemberByAttributs(tree, _sibling->parents[1]->current)->current;
+    if (new_parent1==NULL && new_parent2==NULL) exit(1); 
     _addChild(tree, new_parent1, new_parent2, new_sibling); 
 }
 
