@@ -2,13 +2,14 @@
 #include "header/node.h"
 
 generic_type createNode(Duck duck) {
-    generic_type member = malloc(sizeof(struct node));    
+    generic_type member = malloc(sizeof(struct node));  
+    member->children = malloc(sizeof(generic_type));  
     member->current = duck;
     member->parents[0] = NULL; 
     member->parents[1] = NULL; 
     member->partner = NULL; 
-    member->children = malloc(sizeof(generic_type));
     member->nbChildren = 0; 
+    if(member == NULL) exit(1); 
     return member;   
 }
 
@@ -59,6 +60,9 @@ void _destruct_node(generic_type node) {
     free(node->current);
     free(node->children);
     free(node);
+    node->children = NULL; 
+    node->current = NULL; 
+    node = NULL; 
 }
  
 void delete_tree_from_node(generic_type current_point) {
@@ -73,10 +77,6 @@ void delete_tree_from_node(generic_type current_point) {
  * 1) from node : toRoot(){ while toRoot() }
  * 2) from root : toNode(){ while toNode() }
 */
-unsigned int not(unsigned int i){
-    return (i == 1) ? 0 : 1; 
-}
-
 bool isOrphelin(generic_type orphelin) {
     return (orphelin->parents[0] == NULL && orphelin->parents[1] == NULL); 
 }
@@ -89,16 +89,16 @@ void globalSearch(generic_type current_node,
         search(current_node, searchNode, other_duck); 
         return;
     } 
-    // Ne pas rester bloqué dans un root local 
+    // Ne pas rester bloqué dans un root local (sub_root)
     for(unsigned int i = 0; i < 2; ++i) { 
         if (current_node->parents[i] != NULL) {
             globalSearch(current_node->parents[i], searchRoot, searchNode, other_duck); 
         } else if (current_node->nbChildren > 0) {
             // repasse par enfant pour atteindre autre parent d'indice not(i)
             if (isOrphelin(current_node)) { 
-                if (current_node->children[0]->parents[not(i)]->parents[0] != NULL 
-                    || current_node->children[0]->parents[not(i)]->parents[1] != NULL) {
-                    globalSearch(current_node->children[0]->parents[not(i)], searchRoot, searchNode, other_duck); 
+                if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
+                    || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
+                    globalSearch(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
                 }
             }
         }
