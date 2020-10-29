@@ -22,18 +22,14 @@ static void _addChildren(generic_type parent, generic_type child) {
 
 void addChild(generic_type parent1, generic_type parent2, generic_type new_child) {
     if (parent1==NULL && parent2==NULL) exit(1); 
-    if (parent2 == NULL) {
+    if (parent2 != NULL) {
         _addChildren(parent1, new_child);
         new_child->parents[0] = parent1;
-    } else if (parent1 == NULL) {
-        _addChildren(parent2, new_child);
-        new_child->parents[1] = parent2;
-    } else {
-        _addChildren(parent1, new_child);
-        _addChildren(parent2, new_child);
-        new_child->parents[0] = parent1;
-        new_child->parents[1] = parent2;
     }
+    if (parent1 != NULL) {
+        _addChildren(parent2, new_child);
+        new_child->parents[1] = parent2;
+    } 
 }
 
 void the_wedding_present(generic_type node, generic_type other_node) {
