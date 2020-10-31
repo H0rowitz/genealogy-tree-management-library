@@ -81,6 +81,14 @@ bool _is_orphelin(gen_t orphelin) {
     return (orphelin->parents[0] == NULL && orphelin->parents[1] == NULL);
 }
 
+size_t get_nb_set_parents(gen_t m) {
+    size_t n = 0; 
+    for(size_t i = 0; i < 2; ++i){
+        if (m->parents[i] != NULL) n++; 
+    }
+    return n; 
+}
+
 void _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
 
     if(searchRoot(current_node)){
@@ -88,8 +96,8 @@ void _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNo
         _search(current_node, searchNode, other_duck);
     }
     
-    size_t nb_parents = sizeof(current_node->parents)/sizeof(current_node->parents[0]); 
-    for(size_t i = 0; i < nb_parents; ++i) {
+     
+    for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) {
         if (current_node->parents[i] != NULL) {
             _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
         } else if (current_node->nbChildren > 0) {
