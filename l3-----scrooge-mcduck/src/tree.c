@@ -47,9 +47,9 @@ void the_wedding_present(Tree tree, Duck partner1, Duck partner2) {
     tree->nodes[tree->nbNode-1] = new_partner2; 
 }
 
-void search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other_duck) {
+Duck search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other_duck) {
     gen_t _duck = getMemberByAttributs(tree, duck); 
-    _search(_duck, searchFunction, other_duck); 
+    return _search(_duck, searchFunction, other_duck); 
 }
 
 void show(Tree tree, Duck duck) {
@@ -62,10 +62,10 @@ void delete_from_node(Tree tree, Duck duck) {
     _delete_from_node(_duck);  
 }
 
-void globalSearch(Tree tree, Duck duck, 
+Duck global_search(Tree tree, Duck duck, 
     bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
     gen_t _duck = getMemberByAttributs(tree, duck); 
-    _globalSearch(_duck, searchRoot, searchNode, other_duck); 
+    return _global_search(_duck, searchRoot, searchNode, other_duck); 
 }   
 
 void createGraphViz(Tree tree) {

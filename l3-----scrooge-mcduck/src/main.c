@@ -43,10 +43,12 @@ int main(int argc, char* argv[]) {
     show(tree, root_A); printf("\n");
 
     printf("\n==SEARCH PART==\n");
-    search(tree, root_B, is_same, enfant_C); 
+    Duck searched_duck = search(tree, root_B, is_same, enfant_C); 
+    displayDuck(searched_duck);
 
     printf("\n==GLOBAL SEARCH PART==\n");
-    globalSearch(tree, enfant_I, isRootMember, is_same, enfant_C); 
+    Duck global_searched_duck = global_search(tree, enfant_F, isRootMember, is_same, enfant_C); 
+    displayDuck(global_searched_duck); 
     
     createGraphViz(tree);
     

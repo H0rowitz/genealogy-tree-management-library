@@ -63,13 +63,13 @@ at the begining of the file.
 A (enfant_AB_C, enfant_AB_D (enfant_ED_F, enfant_ED_G (enfant_GH_I)))
 
 ==SEARCH PART==
-condition OK: enfant_AB_C
+Duck trouvé (depuis fonction): enfant_AB_C
+, "," enfant_AB_C
 
 ==GLOBAL SEARCH PART==
 ROOT MEMBER: A
-condition OK: enfant_AB_C
-ROOT MEMBER: B
-condition OK: enfant_AB_C
+Duck trouvé (depuis fonction): enfant_AB_C
+, "," enfant_AB_C
 ```
 
 ## Graphviz rendering (w.r.t 2 root members)

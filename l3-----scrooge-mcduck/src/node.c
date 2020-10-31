@@ -37,11 +37,13 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
     other_node->partner = node; 
 }
 
-void _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
-    if(searchFunction(current_point->current, other_duck)) printf("condition OK: %s\n", current_point->current->name);
+Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
+    if(searchFunction(current_point->current, other_duck)) 
+        printf("Duck trouvé (depuis fonction): %s\n", current_point->current->name);
     for (unsigned int i = 0; i < current_point->nbChildren; ++i) {
-        _search(current_point->children[i], searchFunction, other_duck);
+        return _search(current_point->children[i], searchFunction, other_duck);
     }
+    return current_point->current; 
 }
 
 void _show(gen_t current_point) {
@@ -76,35 +78,29 @@ void _delete_from_node(gen_t current_point) {
     _destruct_node(current_point);
 }
 
-/*SEARCH ON GLOBAL TREE :
- * 1) from node : toRoot(){ while toRoot() }
- * 2) from root : toNode(){ while toNode() }
-*/
-bool _isOrphelin(gen_t orphelin) {
+bool _is_orphelin(gen_t orphelin) {
     return (orphelin->parents[0] == NULL && orphelin->parents[1] == NULL);
 }
 
-void _globalSearch(gen_t current_node, 
-    bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*),Duck other_duck) {
+Duck _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*),Duck other_duck) {
 
     if(searchRoot(current_node)){
         printf("ROOT MEMBER: %s\n", current_node->current->name);
-        _search(current_node, searchNode, other_duck);
-        return;
-    } 
-    // Ne pas rester bloqué dans un root local (sub_root)
+        return _search(current_node, searchNode, other_duck);
+    }
+    
     size_t nb_parents = sizeof(current_node->parents)/sizeof(current_node->parents[0]); 
     for(size_t i = 0; i < nb_parents; ++i) {
         if (current_node->parents[i] != NULL) {
-            _globalSearch(current_node->parents[i], searchRoot, searchNode, other_duck);
+            return _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
         } else if (current_node->nbChildren > 0) {
-            // repasse par enfant pour atteindre autre parent d'indice not(i)
-            if (_isOrphelin(current_node)) {
+            if (_is_orphelin(current_node)) {
                 if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
                     || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
-                    _globalSearch(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
+                    return _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
                 }
             }
         }
-    }    
-}           
+    }      
+    return current_node->current;    
+}

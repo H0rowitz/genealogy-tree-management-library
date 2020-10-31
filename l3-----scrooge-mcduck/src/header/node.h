@@ -25,9 +25,9 @@ struct node {
 gen_t createNode(Duck);
 
 /*!
- * fonction permettant d'ajouter un frère ou une soeur a un canard (noeud de l'arbre)
+ * fonction permettant d'ajouter un frère ou une soeur à un canard (noeud de l'arbre)
  * \param noeud le noeud sur lequel on va devoir ajouter le frere ou la soeur
- * \param canard le canard a ajouter en tant que frere ou soeur
+ * \param canard le canard à ajouter en tant que frere ou soeur
 */
 void _addSibling(gen_t, Duck);
 
@@ -52,7 +52,7 @@ void _the_wedding_present(gen_t, gen_t);
  * \param canard le canard a partir du qu'elle on commence la recherche
  * \param function la fonction de recherche TODO 
 */
-void _search(gen_t, bool(*)(void*,void*), Duck);
+Duck _search(gen_t, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -70,14 +70,17 @@ void _delete_from_node(gen_t);
  * Global search :
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
+ *  // Ne pas rester bloqué dans un root local (sub_root): 
+ *         - repasse par un enfant si bloqué 
+ *         - atteind parents[not(i)]
 */
-void _globalSearch(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
+Duck _global_search(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
 
 
 /*!
  * fonction permettant de savoir si un canard ne possède pas de parent
  * \param canard le canard sur lequel on veut obtenir l'information des parents
 */
-bool _isOrphelin(gen_t);
+bool _is_orphelin(gen_t);
 
 #endif
