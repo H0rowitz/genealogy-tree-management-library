@@ -44,7 +44,7 @@ Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other
     for (unsigned int i = 0; i < current_point->nbChildren; ++i) {
         return _search(current_point->children[i], searchFunction, other_duck);
     }
-    return current_point->current; 
+    return NULL; 
 }
 
 void _show(gen_t current_point) {
@@ -103,5 +103,5 @@ Duck _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNo
             }
         }
     }      
-    return current_node->current;    
+    return NULL;    
 }
