@@ -91,22 +91,25 @@ size_t get_nb_set_parents(gen_t m) {
 
 void _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
 
-    if(searchRoot(current_node)){
-        printf("ROOT MEMBER: %s\n", current_node->current->name);
-        _search(current_node, searchNode, other_duck);
-    }
-    
-     
-    for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) {
-        if (current_node->parents[i] != NULL) {
-            _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
-        } else if (current_node->nbChildren > 0) {
-            if (_is_orphelin(current_node)) {
-                if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
-                    || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
-                    _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
+    if (searchNode(current_node->current, other_duck)==0) {
+        if(searchRoot(current_node)){
+            printf("ROOT MEMBER: %s\n", current_node->current->name);
+            _search(current_node, searchNode, other_duck);
+        }
+
+        for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) {
+            if (current_node->parents[i] != NULL) {
+                _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+            } else if (current_node->nbChildren > 0) {
+                if (_is_orphelin(current_node)) {
+                    if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
+                        || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
+                        _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
+                    }
                 }
             }
-        }
-    }       
+        }       
+    } else {
+        printf("Duck trouvé: %s\n", current_node->current->name); 
+    }
 }
