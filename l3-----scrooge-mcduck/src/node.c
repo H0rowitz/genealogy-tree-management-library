@@ -40,11 +40,10 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
 Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
     if(searchFunction(current_point->current, other_duck)) 
         printf("Duck trouvé (depuis fonction): %s\n", current_point->current->name);
-        return current_point->current; 
     for (unsigned int i = 0; i < current_point->nbChildren; ++i) {
         return _search(current_point->children[i], searchFunction, other_duck);
     }
-    return NULL; 
+    return current_point->current; 
 }
 
 void _show(gen_t current_point) {
