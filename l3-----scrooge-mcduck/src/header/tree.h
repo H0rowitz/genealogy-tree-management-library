@@ -12,7 +12,7 @@
 typedef struct tree *Tree;
 
 struct tree {
-    unsigned nbNode;
+    size_t nbNode;
     family_member root;
     family_member* nodes; 
 };
@@ -29,7 +29,7 @@ Tree initTree(Duck);
  * \param already_child
  * \param the_fake_present soeur/frère nouvellement né(e)
 */
-void _addSibling(Tree, Duck, Duck); 
+void addSibling(Tree, Duck, Duck); 
 
 /*!
  * fonction permettant de faire enfanter aux parents
@@ -38,7 +38,7 @@ void _addSibling(Tree, Duck, Duck);
  * \param parent2
  * \param new_child 
 */
-void _addChild(Tree, Duck, Duck, Duck);
+void addChild(Tree, Duck, Duck, Duck);
 
 /*!
  * fonction permettant de connecter deux nodes par l'intérmédiraire de partner
@@ -46,15 +46,15 @@ void _addChild(Tree, Duck, Duck, Duck);
  * \param parent1
  * \param parent2 
 */
-void _the_wedding_present(Tree, Duck, Duck); 
+void the_wedding_present(Tree, Duck, Duck); 
 
 /**
- * permet de récupérer un family_member par son nom 
- * attention l'attribut doit être unique pour éviter les collisions 
+ * permet de récupérer un family_member en comparant ses attributs
+ * part du principe que les croisements entre attributs sont uniques.   
  * \param tree
- * \param name nom du canard 
+ * \param duck  
 */
-family_member getMemberByName(Tree, Duck); 
+gen_t getMemberByAttributs(Tree, Duck); 
 
 /*!
  * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
@@ -63,14 +63,14 @@ family_member getMemberByName(Tree, Duck);
  * \param canard 
  * \param function la fonction de recherche TODO 
 */
-void _search(Tree, Duck, bool(*)(void*,void*),Duck);
+void search(Tree, Duck, bool(*)(void*,void*),Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param tree  
  * \param canard le canard a partir du qu'elle on commence a afficher la descendance
 */
-void _show(Tree, Duck);
+void show(Tree, Duck);
 
 /*!
  * fonction permettant de detruire une descendance a partir 
@@ -78,14 +78,14 @@ void _show(Tree, Duck);
  * \param tree 
  * \param canard le canard a partir duquel on commence à détruire la déscendance (root)
 */
-void _delete_from_node(Tree, Duck); 
+void delete_from_node(Tree, Duck); 
 
 /**
  * Global search :
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-void _globalSearch(Tree, Duck, bool(*)(generic_type), bool(*)(void*,void*), Duck); 
+void globalSearch(Tree, Duck, bool(*)(gen_t), bool(*)(void*,void*), Duck); 
 
 /**
  * generate a .dot file to format a graph of the tree 
@@ -95,6 +95,6 @@ void createGraphViz(Tree tree);
 /**
  * output the characteristics of the tree node 
 */
-void displayAttributsNodes(Tree tree);
+void displayTreeStructure(Tree tree);
 
 #endif

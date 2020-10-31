@@ -8,13 +8,13 @@
 #include "mcduck.h" 
  
 typedef struct node* family_member; 
-typedef family_member generic_type; 
+typedef family_member gen_t; 
 
 struct node {
     Duck current;
-    generic_type parents[2]; 
-    generic_type *children;
-    generic_type partner; 
+    gen_t parents[2]; 
+    gen_t *children;
+    gen_t partner; 
     size_t nbChildren;
 };
 
@@ -22,14 +22,14 @@ struct node {
  * fonction permettant d'initialiser un arbre
  * \param canard le premier canard de la famille
 */
-generic_type createNode(Duck);
+gen_t createNode(Duck);
 
 /*!
  * fonction permettant d'ajouter un frère ou une soeur a un canard (noeud de l'arbre)
  * \param noeud le noeud sur lequel on va devoir ajouter le frere ou la soeur
  * \param canard le canard a ajouter en tant que frere ou soeur
 */
-void addSibling(generic_type, Duck);
+void _addSibling(gen_t, Duck);
 
 /*!
  * fonction permettant d'ajouter un enfant a un couple de canard
@@ -37,14 +37,14 @@ void addSibling(generic_type, Duck);
  * \param canard2 parent n°2
  * \param canard3 l'enfant a ajouter
 */
-void addChild(generic_type, generic_type, generic_type);
+void _addChild(gen_t, gen_t, gen_t);
 
 /*!
  * fonction permettant de marrier 2 canard (noeud de l'arbre)
  * \param canard1 le canard a marrier n°1
  * \param canard2 le canard a marrier n°2
 */
-void the_wedding_present(generic_type, generic_type);
+void _the_wedding_present(gen_t, gen_t);
 
 /*!
  * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
@@ -52,25 +52,32 @@ void the_wedding_present(generic_type, generic_type);
  * \param canard le canard a partir du qu'elle on commence la recherche
  * \param function la fonction de recherche TODO 
 */
-void search(generic_type, bool(*)(void*,void*), Duck);
+void _search(gen_t, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param canard le canard a partir du qu'elle on commence a afficher la descendance
 */
-void show(generic_type);
+void _show(gen_t);
 
 /*!
  * fonction permettant de detruire une descendance a partir d'un noeud idéal après avoir rager sur fortnite
  * \param canard le canard a partir du qu'elle on commence a detruire la descendance
 */
-void delete_tree_from_node(generic_type);
+void _delete_from_node(gen_t);
 
 /*!
  * Global search :
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-void globalSearch(generic_type, bool(*)(generic_type), bool(*)(void*,void*), Duck);  
+void _globalSearch(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
+
+
+/*!
+ * fonction permettant de savoir si un canard ne possède pas de parent
+ * \param canard le canard sur lequel on veut obtenir l'information des parents
+*/
+bool _isOrphelin(gen_t);
 
 #endif

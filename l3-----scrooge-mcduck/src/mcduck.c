@@ -4,7 +4,8 @@ Duck createDuck(char* name, char* firstname, char* surname){
     Duck duck = malloc(sizeof(struct duck)); 
     duck->name = name;
     duck->firstname = firstname; 
-    duck->surname = surname; 
+    duck->surname = surname;
+    if(duck == NULL) exit(1);  
     return duck; 
 }
 

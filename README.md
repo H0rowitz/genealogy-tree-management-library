@@ -18,31 +18,31 @@ Tree initTree(Duck);
 ```
 Add a sibling to a node 
 ```c
-void _addSibling(Tree, Duck, Duck); 
+void addSibling(Tree, Duck, Duck); 
 ```
 Add a child to a node 
 ```c
-void _addChild(Tree, Duck, Duck, Duck);
+void addChild(Tree, Duck, Duck, Duck);
 ```
 Proceed to wedding two family members
 ```c
-void _the_wedding_present(Tree, Duck, Duck); 
+void the_wedding_present(Tree, Duck, Duck); 
 ```
 Search for a specific duck from a choosen one 
 ```c
-void _search(Tree, Duck, bool(*)(void*,void*),Duck);
+void search(Tree, Duck, bool(*)(void*,void*),Duck);
 ```
 Output the sub-family member of a choosen node 
 ```c
-void _show(Tree, Duck);
+void show(Tree, Duck);
 ```
 Delete sub-family members from a choosen node 
 ```c
-void _delete_from_node(Tree, Duck); 
+void delete_from_node(Tree, Duck); 
 ```
 You can define the type of the data stored in the list by modifying
 ```c
-typedef family_member generic_type; 
+typedef family_member gen_t; 
 ```
 at the begining of the file.
 
@@ -72,5 +72,5 @@ ROOT MEMBER: B
 condition OK: enfant_AB_C
 ```
 
-### Graphviz
-![Graphviz rendering (w.r.t 2 root members)](images/graph.png)
+## Graphviz rendering (w.r.t 2 root members)
+![Graphviz rendering (w.r.t 2 root members)](l3-----scrooge-mcduck/images/graph.png)
