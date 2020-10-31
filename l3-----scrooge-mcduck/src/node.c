@@ -37,13 +37,12 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
     other_node->partner = node; 
 }
 
-Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
+void _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
     if(searchFunction(current_point->current, other_duck)) 
         printf("Duck trouvé (depuis fonction): %s\n", current_point->current->name);
-    for (unsigned int i = 0; i < current_point->nbChildren; ++i) {
-        return _search(current_point->children[i], searchFunction, other_duck);
+    for (size_t i = 0; i < current_point->nbChildren; ++i) {
+        _search(current_point->children[i], searchFunction, other_duck); 
     }
-    return current_point->current; 
 }
 
 void _show(gen_t current_point) {
@@ -82,25 +81,24 @@ bool _is_orphelin(gen_t orphelin) {
     return (orphelin->parents[0] == NULL && orphelin->parents[1] == NULL);
 }
 
-Duck _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*),Duck other_duck) {
+void _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
 
     if(searchRoot(current_node)){
         printf("ROOT MEMBER: %s\n", current_node->current->name);
-        return _search(current_node, searchNode, other_duck);
+        _search(current_node, searchNode, other_duck);
     }
     
     size_t nb_parents = sizeof(current_node->parents)/sizeof(current_node->parents[0]); 
     for(size_t i = 0; i < nb_parents; ++i) {
         if (current_node->parents[i] != NULL) {
-            return _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+            _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
         } else if (current_node->nbChildren > 0) {
             if (_is_orphelin(current_node)) {
                 if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
                     || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
-                    return _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
+                    _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
                 }
             }
         }
-    }      
-    return NULL;    
+    }       
 }

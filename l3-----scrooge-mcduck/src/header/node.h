@@ -49,10 +49,11 @@ void _the_wedding_present(gen_t, gen_t);
 /*!
  * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
  * et les /!\ frères et soeur /!\ d'un noeud donner
- * \param canard le canard a partir du qu'elle on commence la recherche
- * \param function la fonction de recherche TODO 
+ * \param canard à partir du qu'elle on commence la recherche
+ * \param function de recherche TODO 
+ * \param canard que l'on cherche 
 */
-Duck _search(gen_t, bool(*)(void*,void*), Duck);
+void _search(gen_t, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -73,9 +74,13 @@ void _delete_from_node(gen_t);
  *  // Ne pas rester bloqué dans un root local (sub_root): 
  *         - repasse par un enfant si bloqué 
  *         - atteind parents[not(i)]
+ * \param tree 
+ * \param duck à partir duquel on cherche 
+ * \param searchRoot 
+ * \param searchNode 
+ * \param duck que l'on cherche  
 */
-Duck _global_search(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
-
+void _global_search(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant de savoir si un canard ne possède pas de parent

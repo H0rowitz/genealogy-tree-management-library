@@ -63,7 +63,7 @@ gen_t getMemberByAttributs(Tree, Duck);
  * \param canard 
  * \param function la fonction de recherche TODO 
 */
-Duck search(Tree, Duck, bool(*)(void*,void*),Duck);
+void search(Tree, Duck, bool(*)(void*,void*),Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -85,7 +85,7 @@ void delete_from_node(Tree, Duck);
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-Duck global_search(Tree, Duck, bool(*)(gen_t), bool(*)(void*,void*), Duck); 
+void global_search(Tree, Duck, bool(*)(gen_t), bool(*)(void*,void*), Duck); 
 
 /**
  * generate a .dot file to format a graph of the tree 
