@@ -1,8 +1,8 @@
 #include "header/tree.h"
 #include <stdio.h>
 
-Tree initTree(Duck duck) {
-    gen_t root_duck = createNode(duck); 
+Tree init_tree(Duck duck) {
+    gen_t root_duck = create_node(duck); 
     Tree newTree = malloc(sizeof(struct tree)); 
     newTree->nodes = malloc(sizeof(gen_t));
     newTree->nbNode = 1;
@@ -21,35 +21,35 @@ gen_t getMemberByAttributs(Tree tree, Duck other_duck) {
     return NULL; 
 }
 
-void addSibling(Tree tree, Duck sibling, Duck new_sibling) {
+void add_sibling(Tree tree, Duck sibling, Duck new_sibling) {
     gen_t _sibling = getMemberByAttributs(tree, sibling);
     Duck new_parent1 = getMemberByAttributs(tree, _sibling->parents[0]->current)->current;
     Duck new_parent2 = getMemberByAttributs(tree, _sibling->parents[1]->current)->current;
     if (new_parent1 == NULL && new_parent2 == NULL) exit(1); 
-    addChild(tree, new_parent1, new_parent2, new_sibling); 
+    add_child(tree, new_parent1, new_parent2, new_sibling); 
 }
 
-void addChild(Tree tree, Duck parent1, Duck parent2, Duck child) {  
+void add_child(Tree tree, Duck parent1, Duck parent2, Duck child) {  
     gen_t new_parent1 = (parent1 == NULL) ? NULL : getMemberByAttributs(tree, parent1);
     gen_t new_parent2 = (parent2 == NULL) ? NULL : getMemberByAttributs(tree, parent2); 
     if (new_parent1 == NULL && new_parent2 == NULL) exit(1); 
-    gen_t new_child = createNode(child);
+    gen_t new_child = create_node(child);
     _addChild(new_parent1, new_parent2, new_child); 
     tree->nodes = realloc(tree->nodes, sizeof(gen_t) * ++(tree->nbNode));
     tree->nodes[tree->nbNode-1] = new_child; 
 }
 
 void the_wedding_present(Tree tree, Duck partner1, Duck partner2) {
-    gen_t new_partner2 = createNode(partner2); 
+    gen_t new_partner2 = create_node(partner2); 
     gen_t new_partner1 = getMemberByAttributs(tree, partner1);  
     _the_wedding_present(new_partner1, new_partner2); 
     tree->nodes = realloc(tree->nodes, sizeof(gen_t) * ++(tree->nbNode));
     tree->nodes[tree->nbNode-1] = new_partner2; 
 }
 
-void search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other_duck) {
-    gen_t _duck = getMemberByAttributs(tree, duck); 
-    _search(_duck, searchFunction, other_duck); 
+Duck search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other_duck) {
+    gen_t _duck = getMemberByAttributs(tree, duck);    
+    return _search(_duck, searchFunction, other_duck); 
 }
 
 void show(Tree tree, Duck duck) {
@@ -62,12 +62,12 @@ void delete_from_node(Tree tree, Duck duck) {
     _delete_from_node(_duck);  
 }
 
-void global_search(Tree tree, Duck duck, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
+Duck global_search(Tree tree, Duck duck, bool(*searchRoot)(void*), bool(*searchNode)(void*,void*), Duck other_duck) {
     gen_t _duck = getMemberByAttributs(tree, duck); 
-    _global_search(_duck, searchRoot, searchNode, other_duck); 
-}   
+    return _global_search(_duck, searchRoot, searchNode, other_duck); 
+}  
 
-void createGraphViz(Tree tree) {
+void create_graph_viz(Tree tree) {
     FILE *file = fopen("graph.dot", "w+");
     if(file == NULL) exit(EXIT_FAILURE);
 
@@ -81,7 +81,7 @@ void createGraphViz(Tree tree) {
     fclose(file);
 }
 
-void displayTreeStructure(Tree tree) {
+void display_tree_structure(Tree tree) {
     for (size_t i = 0; i < tree->nbNode; ++i) {
         gen_t node = tree->nodes[i]; 
         char* parent1 = (node->parents[0]) ? node->parents[0]->current->name:"NULL"; 

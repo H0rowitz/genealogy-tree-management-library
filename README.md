@@ -3,42 +3,48 @@
 ## Compilation w/ makefile
 ```sh
 $ gcc -std=c99 -Wall -pedantic src/main.c -o main.out src/mcduck.c src/node.c src/tree.c
+or 
+$ make -f MakeFile 
 ```
 ## Execution
 ```sh
-$ ./main.out
+$ ./main
 ```
 Create a duck
 ```c
-Duck createDuck(char*, char*, char*);
+Duck create_duck(char*, char*, char*);
 ```
 Initiate the family members tree from root node
 ```c
-Tree initTree(Duck);
+Tree init_tree(Duck);
 ```
-Add a sibling to a node 
+Add a sibling  
 ```c
-void addSibling(Tree, Duck, Duck); 
+void add_sibling(Tree, Duck, Duck); 
 ```
-Add a child to a node 
+Add a child 
 ```c
-void addChild(Tree, Duck, Duck, Duck);
+void add_child(Tree, Duck, Duck, Duck);
 ```
 Proceed to wedding two family members
 ```c
 void the_wedding_present(Tree, Duck, Duck); 
 ```
-Search for a specific duck from a choosen one 
+Search for a specific duck  
 ```c
 void search(Tree, Duck, bool(*)(void*,void*),Duck);
 ```
-Output the sub-family member of a choosen node 
+Output the sub-family members
 ```c
 void show(Tree, Duck);
 ```
-Delete sub-family members from a choosen node 
+Delete sub-family members from node 
 ```c
 void delete_from_node(Tree, Duck); 
+```
+Search for a node through all the tree  
+```c
+void global_search(Tree, Duck); 
 ```
 You can define the type of the data stored in the list by modifying
 ```c

@@ -1,6 +1,6 @@
 #include "header/mcduck.h"
 
-Duck createDuck(char* name, char* firstname, char* surname){
+Duck create_duck(char* name, char* firstname, char* surname){
     Duck duck = malloc(sizeof(struct duck)); 
     duck->name = name;
     duck->firstname = firstname; 
@@ -9,7 +9,7 @@ Duck createDuck(char* name, char* firstname, char* surname){
     return duck; 
 }
 
-void displayDuck(void* md) {
+void display_duck(void* md) {
     Duck tmp = (Duck)md;
     strcmp(tmp->surname,"") == 0 ? printf("%s %s\t", tmp->firstname, tmp->name) : 
     printf("%s \"%s\" %s\n", tmp->firstname, tmp->surname, tmp->name);

@@ -1,7 +1,15 @@
 #include "header/mcduck.h"
 #include "header/node.h"
 
-gen_t createNode(Duck duck) {
+size_t get_nb_set_parents(gen_t m) {
+    size_t n = 0; 
+    for(size_t i = 0; i < 2; ++i){
+        if (m->parents[i] != NULL) n++; 
+    }
+    return n; 
+}
+
+gen_t create_node(Duck duck) {
     gen_t member = malloc(sizeof(struct node));  
     member->children = malloc(sizeof(gen_t));  
     member->current = duck;
@@ -37,16 +45,8 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
     other_node->partner = node; 
 }
 
-void _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) { 
-    if(searchFunction(current_point->current, other_duck)) 
-        printf("Duck trouvé (depuis fonction): %s\n", current_point->current->name);
-    for (size_t i = 0; i < current_point->nbChildren; ++i) {
-        _search(current_point->children[i], searchFunction, other_duck); 
-    }
-}
-
 void _show(gen_t current_point) {
-    if(current_point->current != NULL ) {
+    if(current_point->current != NULL) {
         printf("%s ", current_point->current->name);
         printf("(");
         for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
@@ -81,35 +81,42 @@ bool _is_orphelin(gen_t orphelin) {
     return (orphelin->parents[0] == NULL && orphelin->parents[1] == NULL);
 }
 
-size_t get_nb_set_parents(gen_t m) {
-    size_t n = 0; 
-    for(size_t i = 0; i < 2; ++i){
-        if (m->parents[i] != NULL) n++; 
-    }
-    return n; 
+bool is_root_member(void* m) {
+    gen_t member = (gen_t)m;
+    return ( (member->nbChildren > 0) 
+    && 
+        (member->children[0]->parents[0]->parents[0] == NULL 
+        && member->children[0]->parents[0]->parents[1] == NULL)
+    ); 
 }
 
-void _global_search(gen_t current_node, bool(*searchRoot)(gen_t), bool(*searchNode)(void*,void*), Duck other_duck) {
-
-    if (searchNode(current_node->current, other_duck)==0) {
-        if(searchRoot(current_node)){
-            printf("ROOT MEMBER: %s\n", current_node->current->name);
-            _search(current_node, searchNode, other_duck);
-        }
-
-        for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) {
-            if (current_node->parents[i] != NULL) {
-                _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
-            } else if (current_node->nbChildren > 0) {
-                if (_is_orphelin(current_node)) {
-                    if (current_node->children[0]->parents[!(i)]->parents[0] != NULL 
-                        || current_node->children[0]->parents[!(i)]->parents[1] != NULL) {
-                        _global_search(current_node->children[0]->parents[!(i)], searchRoot, searchNode, other_duck); 
-                    }
-                }
-            }
-        }       
-    } else {
-        printf("Duck trouvé: %s\n", current_node->current->name); 
+Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) {  
+    if(searchFunction(current_point->current, other_duck)) 
+        return current_point->current;
+    Duck found = NULL;
+    for (size_t i = 0; i < current_point->nbChildren; ++i) 
+        found = _search(current_point->children[i], searchFunction, other_duck); 
+    return found;
+}
+   
+Duck _global_search(gen_t current_node, bool(*searchRoot)(void*), bool(*searchNode)(void*,void*), Duck other_duck) {
+    if(searchRoot(current_node)){
+        printf("ROOT MEMBER: %s\n", current_node->current->name);
+        return _search(current_node, searchNode, other_duck); 
     }
+
+    Duck found = NULL; 
+    for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) 
+        found = _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+        
+    if (_is_orphelin(current_node) && current_node->nbChildren > 0) {
+        if (current_node->children[0]->parents[0] != NULL 
+        && searchNode(current_node->current, current_node->children[0]->parents[0]->current)==0) {
+            found = _global_search(current_node->children[0]->parents[0], searchRoot, searchNode, other_duck);
+        } else if (current_node->children[0]->parents[1] != NULL 
+        && searchNode(current_node->current, current_node->children[0]->parents[1]->current)==0) {
+            found = _global_search(current_node->children[0]->parents[1], searchRoot, searchNode, other_duck);
+        }
+    }
+    return found; 
 }

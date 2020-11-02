@@ -21,8 +21,8 @@ struct duck {
  * \param surname le surnom porté par le canard
  * \return un carnard
 */
-Duck createDuck(char*, char*, char*);
+Duck create_duck(char*, char*, char*);
 bool is_same(void*, void*); 
-void displayDuck(void*);
+void display_duck(void*);
 
 #endif

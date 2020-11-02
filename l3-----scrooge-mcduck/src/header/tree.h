@@ -21,7 +21,7 @@ struct tree {
  * fonction permettant d'initialiser un arbre
  * \param canard
 */
-Tree initTree(Duck);
+Tree init_tree(Duck);
 
 /**
  * permet de rejouter un frère ou une soeur à un canard quelconque non root 
@@ -29,7 +29,7 @@ Tree initTree(Duck);
  * \param already_child
  * \param the_fake_present soeur/frère nouvellement né(e)
 */
-void addSibling(Tree, Duck, Duck); 
+void add_sibling(Tree, Duck, Duck); 
 
 /*!
  * fonction permettant de faire enfanter aux parents
@@ -38,7 +38,7 @@ void addSibling(Tree, Duck, Duck);
  * \param parent2
  * \param new_child 
 */
-void addChild(Tree, Duck, Duck, Duck);
+void add_child(Tree, Duck, Duck, Duck);
 
 /*!
  * fonction permettant de connecter deux nodes par l'intérmédiraire de partner
@@ -63,7 +63,7 @@ gen_t getMemberByAttributs(Tree, Duck);
  * \param canard 
  * \param function la fonction de recherche TODO 
 */
-void search(Tree, Duck, bool(*)(void*,void*),Duck);
+Duck search(Tree, Duck, bool(*)(void*,void*),Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -85,16 +85,17 @@ void delete_from_node(Tree, Duck);
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
 */
-void global_search(Tree, Duck, bool(*)(gen_t), bool(*)(void*,void*), Duck); 
+Duck global_search(Tree, Duck, bool(*)(void*), bool(*)(void*,void*), Duck); 
 
 /**
  * generate a .dot file to format a graph of the tree 
 */
-void createGraphViz(Tree tree);
+void create_graph_viz(Tree);
 
 /**
- * output the characteristics of the tree node 
+ * output the structure of the tree 
 */
-void displayTreeStructure(Tree tree);
+void display_tree_structure(Tree);
+
 
 #endif

@@ -1,5 +1,5 @@
 CC = gcc
-EXEC = programme
+EXEC = ./main
 FLAG = -std=c99
 BUILD_DIR = build
 SOURCE_DIR = src

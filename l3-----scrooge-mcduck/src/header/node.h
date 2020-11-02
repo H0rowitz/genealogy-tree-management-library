@@ -22,7 +22,7 @@ struct node {
  * fonction permettant d'initialiser un arbre
  * \param canard le premier canard de la famille
 */
-gen_t createNode(Duck);
+gen_t create_node(Duck);
 
 /*!
  * fonction permettant d'ajouter un frère ou une soeur à un canard (noeud de l'arbre)
@@ -53,7 +53,7 @@ void _the_wedding_present(gen_t, gen_t);
  * \param function de recherche TODO 
  * \param canard que l'on cherche 
 */
-void _search(gen_t, bool(*)(void*,void*), Duck);
+Duck _search(gen_t, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
@@ -80,12 +80,19 @@ void _delete_from_node(gen_t);
  * \param searchNode 
  * \param duck que l'on cherche  
 */
-void _global_search(gen_t, bool(*)(gen_t), bool(*)(void*,void*), Duck);
+Duck _global_search(gen_t, bool(*)(void*), bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant de savoir si un canard ne possède pas de parent
  * \param canard le canard sur lequel on veut obtenir l'information des parents
 */
 bool _is_orphelin(gen_t);
+
+/**
+ * return true if member is root
+ */
+bool is_root_member(void*);
+
+int get_depth(gen_t, int); 
 
 #endif
