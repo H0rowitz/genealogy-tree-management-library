@@ -8,7 +8,7 @@
 #include "mcduck.h" 
  
 typedef struct node* family_member; 
-typedef family_member gen_t; 
+typedef family_member gen_t; // shorter 
 
 struct node {
     Duck current;

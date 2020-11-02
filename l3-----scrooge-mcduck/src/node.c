@@ -61,6 +61,9 @@ void _show(gen_t current_point) {
 }
 
 void _destruct_node(gen_t node) {
+    free(node->current->name); // bc of strdup
+    free(node->current->firstname);
+    free(node->current->surname);
     free(node->current);
     free(node->children);
     free(node);
@@ -92,7 +95,7 @@ bool is_root_member(void* m) {
 
 Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) {  
     if(searchFunction(current_point->current, other_duck)) 
-        return current_point->current;
+        return current_point->current; 
     Duck found = NULL;
     for (size_t i = 0; i < current_point->nbChildren; ++i) 
         found = _search(current_point->children[i], searchFunction, other_duck); 
@@ -104,11 +107,9 @@ Duck _global_search(gen_t current_node, bool(*searchRoot)(void*), bool(*searchNo
         printf("ROOT MEMBER: %s\n", current_node->current->name);
         return _search(current_node, searchNode, other_duck); 
     }
-
     Duck found = NULL; 
     for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) 
         found = _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
-        
     if (_is_orphelin(current_node) && current_node->nbChildren > 0) {
         if (current_node->children[0]->parents[0] != NULL 
         && searchNode(current_node->current, current_node->children[0]->parents[0]->current)==0) {

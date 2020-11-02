@@ -2,9 +2,14 @@
 
 Duck create_duck(char* name, char* firstname, char* surname){
     Duck duck = malloc(sizeof(struct duck)); 
+    /*
     duck->name = name;
     duck->firstname = firstname; 
     duck->surname = surname;
+    */
+    duck->name = strdup(name);  
+    duck->firstname = strdup(firstname); 
+    duck->surname = strdup(surname);
     if(duck == NULL) exit(1);  
     return duck; 
 }
