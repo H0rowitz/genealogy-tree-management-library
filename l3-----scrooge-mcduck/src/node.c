@@ -74,7 +74,7 @@ void _destruct_node(gen_t node) {
  
 void _delete_from_node(gen_t current_point) {
     if (current_point == NULL) return;
-    for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
+    for(size_t i = 0; i < current_point->nbChildren; ++i) {
         _delete_from_node(current_point->children[i]);
     }
     _destruct_node(current_point);
