@@ -67,6 +67,9 @@ void _destruct_node(gen_t node) {
     free(node->current);
     free(node->children);
     free(node);
+    node->current->name = NULL;
+    node->current->firstname = NULL; 
+    node->current->surname = NULL; 
     node->children = NULL;
     node->current = NULL;
     node = NULL;
