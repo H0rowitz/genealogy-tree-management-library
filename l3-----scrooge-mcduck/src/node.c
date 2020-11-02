@@ -66,9 +66,9 @@ void _destruct_node(gen_t node) {
     free(node->current->surname);
     free(node->current);
     free(node->children);
-    free(node);
     node->children = NULL;
     node->current = NULL;
+    free(node);
     node = NULL;
 }
  
@@ -96,27 +96,32 @@ bool is_root_member(void* m) {
 Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) {  
     if(searchFunction(current_point->current, other_duck)) 
         return current_point->current; 
-    Duck found = NULL;
-    for (size_t i = 0; i < current_point->nbChildren; ++i) 
-        found = _search(current_point->children[i], searchFunction, other_duck); 
+    Duck found = NULL, temp = NULL;
+    for (size_t i = 0; i < current_point->nbChildren; ++i)  {
+        temp = _search(current_point->children[i], searchFunction, other_duck);
+        found = temp ? temp:found;  
+    }
     return found;
 }
-   
+
 Duck _global_search(gen_t current_node, bool(*searchRoot)(void*), bool(*searchNode)(void*,void*), Duck other_duck) {
     if(searchRoot(current_node)){
         printf("ROOT MEMBER: %s\n", current_node->current->name);
         return _search(current_node, searchNode, other_duck); 
     }
-    Duck found = NULL; 
+    Duck found = NULL, temp = NULL; 
     for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) 
-        found = _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+        temp = _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+        found = temp ? temp:found; 
     if (_is_orphelin(current_node) && current_node->nbChildren > 0) {
         if (current_node->children[0]->parents[0] != NULL 
         && searchNode(current_node->current, current_node->children[0]->parents[0]->current)==0) {
-            found = _global_search(current_node->children[0]->parents[0], searchRoot, searchNode, other_duck);
+            temp = _global_search(current_node->children[0]->parents[0], searchRoot, searchNode, other_duck); 
+            found = temp ? temp:found;  
         } else if (current_node->children[0]->parents[1] != NULL 
         && searchNode(current_node->current, current_node->children[0]->parents[1]->current)==0) {
-            found = _global_search(current_node->children[0]->parents[1], searchRoot, searchNode, other_duck);
+            temp = _global_search(current_node->children[0]->parents[1], searchRoot, searchNode, other_duck);
+            found = temp ? temp:found; 
         }
     }
     return found; 

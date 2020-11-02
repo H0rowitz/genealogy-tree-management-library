@@ -7,6 +7,8 @@ int main(int argc, char* argv[]) {
     Duck root_B = create_duck("B", ",", ",");
     Duck enfant_C = create_duck("enfant_AB_C", ",", ",");
     Duck enfant_D = create_duck("enfant_AB_D", ",", ",");
+    Duck femme_C = create_duck("femme_C", ",", ",");
+    Duck enfant_CC = create_duck("enfant_CC", ",", ",");
 
     Duck femme_E = create_duck("femme_D",",",","); 
     Duck enfant_F = create_duck("enfant_ED_F", ",", ",");
@@ -20,6 +22,8 @@ int main(int argc, char* argv[]) {
     the_wedding_present(tree, root_A, root_B); 
     add_child(tree, root_A, root_B, enfant_C); 
     add_sibling(tree, enfant_C, enfant_D); 
+    the_wedding_present(tree, enfant_C, femme_C);
+    add_child(tree, femme_C, enfant_C, enfant_CC);
 
     the_wedding_present(tree, enfant_D, femme_E); 
     add_child(tree, enfant_D, femme_E, enfant_F); 
@@ -35,12 +39,20 @@ int main(int argc, char* argv[]) {
     show(tree, root_A); printf("\n");
 
     printf("\n==SEARCH PART==\n");
-    Duck duck_found = search(tree, root_A, is_same, enfant_I); 
-    if (duck_found != NULL) display_duck(duck_found); 
-
+    Duck duck_found = search(tree, root_A, is_same, enfant_CC); 
+    if (duck_found != NULL) {
+        display_duck(duck_found); 
+    } else {
+        printf("duck not found 404");
+    }
+    
     printf("\n==GLOBAL SEARCH PART==\n");
     Duck duck_global_found = global_search(tree, femme_E, is_root_member, is_same, enfant_G);
-    if (duck_global_found != NULL) display_duck(duck_global_found);
+    if (duck_global_found != NULL) {
+        display_duck(duck_global_found); 
+    } else {
+        printf("duck not found 404");
+    }
 
     create_graph_viz(tree);
     delete_from_node(tree, root_A); 
