@@ -93,6 +93,4 @@ bool _is_orphelin(gen_t);
  */
 bool is_root_member(void*);
 
-int get_depth(gen_t, int); 
-
 #endif
