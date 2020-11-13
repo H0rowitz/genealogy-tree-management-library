@@ -54,7 +54,7 @@ Duck search(Tree tree, Duck duck, bool(*searchFunction)(void*,void*), Duck other
 
 void show(Tree tree, Duck duck) {
     gen_t _duck = getMemberByAttributs(tree, duck); 
-    _show(_duck); 
+    _show(_duck, 2); 
 }
 
 void delete_from_node(Tree tree, Duck duck) {

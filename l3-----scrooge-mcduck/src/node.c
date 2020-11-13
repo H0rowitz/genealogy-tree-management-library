@@ -45,18 +45,18 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
     other_node->partner = node; 
 }
 
-void _show(gen_t current_point) {
+void _show(gen_t current_point, int n) {
     if(current_point->current != NULL) {
-        printf("%s ", current_point->current->name);
-        printf("(");
+        printf("%s ------- %s\n", current_point->current->name, current_point->partner->current->name);
+        printf("%*s", n, "(");
         for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
             if(current_point->children[i]->nbChildren == 0) {
-                printf("%s%s", current_point->children[i]->current->name, i+1 == current_point->nbChildren ? "" : ", ");
+                printf(" %s %s", current_point->children[i]->current->name, i+1 == current_point->nbChildren ? "" : ", ");
             } else {
-                _show(current_point->children[i]);
+                _show(current_point->children[i], n+=2);
             }
         }
-        printf(")");
+        printf(") ");
     }
 }
 
@@ -93,12 +93,12 @@ bool is_root_member(void* m) {
     ); 
 }
 
-Duck _search(gen_t current_point, bool(*searchFunction)(void*,void*), Duck other_duck) {  
-    if(searchFunction(current_point->current, other_duck)) 
+Duck _search(gen_t current_point, bool(*is_same)(void*,void*), Duck other_duck) {  
+    if(is_same(current_point->current, other_duck)) 
         return current_point->current; 
     Duck found = NULL, temp = NULL;
     for (size_t i = 0; i < current_point->nbChildren; ++i)  {
-        temp = _search(current_point->children[i], searchFunction, other_duck);
+        temp = _search(current_point->children[i], is_same, other_duck);
         found = temp ? temp:found;  
     }
     return found;

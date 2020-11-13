@@ -59,7 +59,7 @@ Duck _search(gen_t, bool(*)(void*,void*), Duck);
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param canard le canard a partir du qu'elle on commence a afficher la descendance
 */
-void _show(gen_t);
+void _show(gen_t, int);
 
 /*!
  * fonction permettant de detruire une descendance a partir d'un noeud idéal après avoir rager sur fortnite
@@ -94,3 +94,4 @@ bool _is_orphelin(gen_t);
 bool is_root_member(void*);
 
 #endif
+    

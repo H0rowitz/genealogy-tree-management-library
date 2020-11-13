@@ -17,11 +17,14 @@ int main(int argc, char* argv[]) {
     Duck femme_H = create_duck("femme_G", ",", ",");
     Duck enfant_I = create_duck("enfant_GH_I", ",", ",");
 
+    Duck enfant_J = create_duck("enfant_AB_J", "", ""); 
+
     Tree tree = init_tree(root_A); 
         
     the_wedding_present(tree, root_A, root_B); 
     add_child(tree, root_A, root_B, enfant_C); 
     add_sibling(tree, enfant_C, enfant_D); 
+    add_sibling(tree, enfant_D, enfant_J); 
     the_wedding_present(tree, enfant_C, femme_C);
     add_child(tree, femme_C, enfant_C, enfant_CC);
 
