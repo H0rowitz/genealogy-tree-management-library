@@ -36,10 +36,10 @@ int main(int argc, char* argv[]) {
     add_child(tree, enfant_G, femme_H, enfant_I); 
 
     printf("\n==STRUCTURE OF THE TREE==\n");
-    display_tree_structure(tree); 
+    display_tree_structure(tree, to_string_duck); 
 
     printf("\n==SHOW PART==\n"); 
-    show(tree, root_A); printf("\n");
+    show(tree, to_string_duck, root_A); printf("\n");
 
     printf("\n==SEARCH PART==\n");
     Duck duck_found = search(tree, root_A, is_same, enfant_CC); 
@@ -50,15 +50,15 @@ int main(int argc, char* argv[]) {
     }
     
     printf("\n==GLOBAL SEARCH PART==\n");
-    Duck duck_global_found = global_search(tree, femme_E, is_root_member, is_same, enfant_G);
+    Duck duck_global_found = global_search(tree, femme_E, to_string_duck, is_root_member, is_same, enfant_G);
     if (duck_global_found != NULL) {
         display_duck(duck_global_found); 
     } else {
         printf("duck not found 404");
     }
 
-    create_graph_viz(tree);
-    delete_from_node(tree, root_A); 
+    create_graph_viz(tree, to_string_duck);
+    delete_from_node(tree, destruct, root_A); 
     
     return 0;
 }

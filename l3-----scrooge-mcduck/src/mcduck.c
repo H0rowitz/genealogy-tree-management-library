@@ -12,7 +12,22 @@ Duck create_duck(char* name, char* firstname, char* surname){
 void display_duck(void* md) {
     Duck tmp = (Duck)md;
     strcmp(tmp->surname,"") == 0 ? printf("%s %s\t", tmp->firstname, tmp->name) : 
-    printf("%s \"%s\" %s\n", tmp->firstname, tmp->surname, tmp->name);
+    printf("%s", tmp->name);
+}
+
+char* to_string_duck(void* duck) {
+    Duck tmp = (Duck)duck;
+    return tmp->name;
+}
+
+void destruct(void* duck) {
+    Duck tmp = (Duck) duck;
+    free(tmp->name);
+    free(tmp->firstname);
+    free(tmp->surname);
+    tmp->name = NULL;
+    tmp->firstname = NULL;
+    tmp->surname = NULL;
 }
 
 bool is_same(void *m, void *m1) {

@@ -11,7 +11,7 @@ typedef struct node* family_member;
 typedef family_member gen_t; // shorter 
 
 struct node {
-    Duck current;
+    void* data;
     gen_t parents[2]; 
     gen_t *children;
     gen_t partner; 
@@ -22,14 +22,14 @@ struct node {
  * fonction permettant d'initialiser un arbre
  * \param canard le premier canard de la famille
 */
-gen_t create_node(Duck);
+gen_t create_node(void*);
 
 /*!
  * fonction permettant d'ajouter un frère ou une soeur à un canard (noeud de l'arbre)
  * \param noeud le noeud sur lequel on va devoir ajouter le frere ou la soeur
  * \param canard le canard à ajouter en tant que frere ou soeur
 */
-void _addSibling(gen_t, Duck);
+void _addSibling(gen_t, void*);
 
 /*!
  * fonction permettant d'ajouter un enfant à un couple de canard
@@ -53,19 +53,19 @@ void _the_wedding_present(gen_t, gen_t);
  * \param function de recherche TODO 
  * \param canard que l'on cherche 
 */
-Duck _search(gen_t, bool(*)(void*,void*), Duck);
+void* _search(gen_t, bool(*)(void*,void*), void*);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param canard le canard à partir duquel on commence à afficher la descendance
 */
-void _show(gen_t, int);
+void _show(gen_t, char*(*)(void*), int);
 
 /*!
  * fonction permettant de detruire une descendance à partir d'un noeud
  * \param canard le canard a partir duquel on commence à detruire la descendance
 */
-void _delete_from_node(gen_t);
+void _delete_from_node(gen_t, void(*)(void*));
 
 /*!
  * Global search :
@@ -80,7 +80,7 @@ void _delete_from_node(gen_t);
  * \param searchNode 
  * \param duck que l'on cherche  
 */
-Duck _global_search(gen_t, bool(*)(void*), bool(*)(void*,void*), Duck);
+void* _global_search(gen_t, char*(*)(void*), bool(*)(void*), bool(*)(void*,void*), void*);
 
 /*!
  * fonction permettant de savoir si un canard ne possède pas de parent(s)

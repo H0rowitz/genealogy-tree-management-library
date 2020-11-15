@@ -22,7 +22,9 @@ struct duck {
  * \return un carnard
 */
 Duck create_duck(char*, char*, char*);
-bool is_same(void*, void*); 
+bool is_same(void*, void*);
+char* to_string_duck(void*);
+void destruct(void*);
 void display_duck(void*);
 
 #endif

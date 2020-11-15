@@ -9,10 +9,10 @@ size_t get_nb_set_parents(gen_t m) {
     return n; 
 }
 
-gen_t create_node(Duck duck) {
+gen_t create_node(void* data) {
     gen_t member = malloc(sizeof(struct node));  
     member->children = malloc(sizeof(gen_t));  
-    member->current = duck;
+    member->data = data;
     member->parents[0] = NULL;
     member->parents[1] = NULL;
     member->partner = NULL;
@@ -45,39 +45,41 @@ void _the_wedding_present(gen_t node, gen_t other_node) {
     other_node->partner = node; 
 }
 
-void _show(gen_t current_point, int n) {
-    if(current_point->current != NULL) {
-        printf("%s ------- %s\n", current_point->current->name, current_point->partner->current->name);
+
+
+void _show(gen_t current_point, char*(*str)(void*), int n) {
+    if(current_point->data != NULL) {
+        printf("%s ------- %s\n", str(current_point->data), str(current_point->partner->data));
         printf("%*s", n, "(");
         for(unsigned int i = 0; i < current_point->nbChildren; ++i) {
             if(current_point->children[i]->nbChildren == 0) {
-                printf(" %s %s", current_point->children[i]->current->name, i+1 == current_point->nbChildren ? "" : ", ");
+                printf(" %s %s", str(current_point->children[i]->data), i+1 == current_point->nbChildren ? "" : ", ");
             } else {
-                _show(current_point->children[i], n+=2);
+                _show(current_point->children[i], str, n+=2);
             }
         }
         printf(") ");
     }
 }
 
-void _destruct_node(gen_t node) {
-    free(node->current->name); // bc of strdup
-    free(node->current->firstname);
-    free(node->current->surname);
-    free(node->current);
+
+// delegaton fonction destruct de la data
+void _destruct_node(gen_t node, void(*destructFunc)(void*)) {
+    destructFunc(node->data);
+    free(node->data);
     free(node->children);
     node->children = NULL;
-    node->current = NULL;
+    node->data = NULL;
     free(node);
     node = NULL;
 }
  
-void _delete_from_node(gen_t current_point) {
+void _delete_from_node(gen_t current_point, void(*destructFun)(void*)) {
     if (current_point == NULL) return;
     for(size_t i = 0; i < current_point->nbChildren; ++i) {
-        _delete_from_node(current_point->children[i]);
+        _delete_from_node(current_point->children[i], destructFun);
     }
-    _destruct_node(current_point);
+    _destruct_node(current_point, destructFun);
 }
 
 bool _is_orphelin(gen_t orphelin) {
@@ -93,34 +95,36 @@ bool is_root_member(void* m) {
     ); 
 }
 
-Duck _search(gen_t current_point, bool(*is_same)(void*,void*), Duck other_duck) {  
-    if(is_same(current_point->current, other_duck)) 
-        return current_point->current; 
-    Duck found = NULL, temp = NULL;
+void* _search(gen_t current_point, bool(*is_same)(void*,void*), void* data) {  
+    if(is_same(current_point->data, data))
+        return current_point->data; 
+    void* found = NULL;
+    void* temp = NULL;
     for (size_t i = 0; i < current_point->nbChildren; ++i)  {
-        temp = _search(current_point->children[i], is_same, other_duck);
+        temp = _search(current_point->children[i], is_same, data);
         found = temp ? temp:found;  
     }
     return found;
 }
 
-Duck _global_search(gen_t current_node, bool(*searchRoot)(void*), bool(*searchNode)(void*,void*), Duck other_duck) {
+void* _global_search(gen_t current_node, char*(*str)(void*), bool(*searchRoot)(void*), bool(*searchNode)(void*,void*), void* data) {
     if(searchRoot(current_node)){
-        printf("ROOT MEMBER: %s\n", current_node->current->name);
-        return _search(current_node, searchNode, other_duck); 
+        printf("ROOT MEMBER: %s\n", str(current_node->data));
+        return _search(current_node, searchNode, data); 
     }
-    Duck found = NULL, temp = NULL; 
+    void* found = NULL;
+    void* temp = NULL; 
     for(size_t i = 0; i < get_nb_set_parents(current_node); ++i) 
-        temp = _global_search(current_node->parents[i], searchRoot, searchNode, other_duck);
+        temp = _global_search(current_node->parents[i], str, searchRoot, searchNode, data);
         found = temp ? temp:found; 
     if (_is_orphelin(current_node) && current_node->nbChildren > 0) {
         if (current_node->children[0]->parents[0] != NULL 
-        && searchNode(current_node->current, current_node->children[0]->parents[0]->current)==0) {
-            temp = _global_search(current_node->children[0]->parents[0], searchRoot, searchNode, other_duck); 
+        && searchNode(current_node->data, current_node->children[0]->parents[0]->data)==0) {
+            temp = _global_search(current_node->children[0]->parents[0], str, searchRoot, searchNode, data); 
             found = temp ? temp:found;  
         } else if (current_node->children[0]->parents[1] != NULL 
-        && searchNode(current_node->current, current_node->children[0]->parents[1]->current)==0) {
-            temp = _global_search(current_node->children[0]->parents[1], searchRoot, searchNode, other_duck);
+        && searchNode(current_node->data, current_node->children[0]->parents[1]->data)==0) {
+            temp = _global_search(current_node->children[0]->parents[1], str, searchRoot, searchNode, data);
             found = temp ? temp:found; 
         }
     }
