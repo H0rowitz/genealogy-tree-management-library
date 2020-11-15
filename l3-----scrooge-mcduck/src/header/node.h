@@ -78,6 +78,7 @@ void _delete_from_node(gen_t, void(*)(void*));
  *      - repasse par un enfant si bloqué 
  *      - atteint parents[not(i)]
  * \param node à partir duquel on cherche 
+ * \param func_str fonction de display et conversion en chaîne de caractères 
  * \param searchRoot 
  * \param searchNode 
  * \param _ objet de type générique que l'on cherche  
