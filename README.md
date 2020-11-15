@@ -1,4 +1,4 @@
-# octopus_prime
+# Projet MCDUCK-PIPOO 
 
 ## Compilation w/ makefile
 ```sh
