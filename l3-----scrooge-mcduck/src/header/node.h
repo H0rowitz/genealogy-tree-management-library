@@ -42,8 +42,8 @@ void _addChild(gen_t, gen_t, gen_t);
 
 /*!
  * fonction permettant de marier 2 noeuds
- * \param duck1 le duck à marrier n°1
- * \param duck2 le duck à marrier n°2
+ * \param node à marier n°1
+ * \param node à marier n°2
 */
 void _the_wedding_present(gen_t, gen_t);
 

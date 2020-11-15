@@ -54,7 +54,7 @@ void the_wedding_present(Tree, void*, void*);
  * part du principe que les croisements de données entre attributs 
  * sont uniques et de même type.    
  * \param tree
- * \param duck  
+ * \param _  
 */
 gen_t getMemberByAttributs(Tree, void*); 
 
