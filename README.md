@@ -49,6 +49,8 @@ Search for a node through all the tree
 void* global_search(Tree, void*, char*(*)(void*), bool(*)(void*), bool(*)(void*,void*), void*); 
 ```
 
+##### REMARQUE: ce projet a été codé en pair programming à l'aide de live share ! (nombre de commits disparates et non représentatifs de la charge de travail).  
+
 ### Current output of the main() function:
 ```bash
 ==STRUCTURE OF THE TREE==

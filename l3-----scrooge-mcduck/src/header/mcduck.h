@@ -29,7 +29,7 @@ Duck create_duck(char*, char*, char*);
 bool is_same(void*, void*);
 
 /**
- * fonction d'output et conversion en chaîne de caractères 
+ * fonction permettant de cast un duck en chaîne de caractères 
  * \param duck à display
  */
 char* to_string_duck(void*);
