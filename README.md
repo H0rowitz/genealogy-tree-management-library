@@ -8,6 +8,8 @@ $ make -f MakeFile
 ```
 ## Execution
 ```sh
+$ ./main.out 
+or
 $ ./main
 ```
 Create a duck
@@ -16,56 +18,54 @@ Duck create_duck(char*, char*, char*);
 ```
 Initiate the family members tree from root node
 ```c
-Tree init_tree(Duck);
+Tree init_tree(void*);
 ```
 Add a sibling  
 ```c
-void add_sibling(Tree, Duck, Duck); 
+void add_sibling(Tree, void*, void*); 
 ```
 Add a child 
 ```c
-void add_child(Tree, Duck, Duck, Duck);
+void add_child(Tree, void*, void*, void*);
 ```
 Proceed to wedding two family members
 ```c
-void the_wedding_present(Tree, Duck, Duck); 
+void the_wedding_present(Tree, void*, void*); 
 ```
 Search for a specific duck  
 ```c
-void search(Tree, Duck, bool(*)(void*,void*),Duck);
+void* search(Tree, void*, bool(*)(void*,void*),void*);
 ```
 Output the sub-family members
 ```c
-void show(Tree, Duck);
+void show(Tree, char*(*)(void*), void*);
 ```
 Delete sub-family members from node 
 ```c
-void delete_from_node(Tree, Duck); 
+void delete_from_node(Tree, void(*)(void*), void*); 
 ```
 Search for a node through all the tree  
 ```c
-void global_search(Tree, Duck); 
+void* global_search(Tree, void*, char*(*)(void*), bool(*)(void*), bool(*)(void*,void*), void*); 
 ```
-You can define the type of the data stored in the list by modifying
-```c
-typedef family_member gen_t; 
-```
-at the begining of the file.
 
 Important : généricité non traitée de manière exhaustive car partielle en C (!= cpp templates). 
 
 ### Current output of the main() function:
 ```bash
 ==STRUCTURE OF THE TREE==
-0 Name: A			    Parents: NULL & NULL
-1 Name: B			    Parents: NULL & NULL
-2 Name: enfant_AB_C		Parents: A & B
-3 Name: enfant_AB_D		Parents: A & B
-4 Name: femme_D			Parents: NULL & NULL
-5 Name: enfant_ED_F		Parents: enfant_AB_D & femme_D
-6 Name: enfant_ED_G		Parents: enfant_AB_D & femme_D
-7 Name: femme_G			Parents: NULL & NULL
-8 Name: enfant_GH_I		Parents: enfant_ED_G & femme_G
+0 Name: A 	  Parents: NULL & NULL
+1 Name: B 	  Parents: NULL & NULL
+2 Name: enfant_AB_C 	Parents: A & B
+3 Name: enfant_AB_D 	Parents: A & B
+4 Name: enfant_AB_J 	Parents: A & B
+5 Name: femme_C 	Parents: NULL & NULL
+6 Name: enfant_CC 	Parents: femme_C & enfant_AB_C
+7 Name: femme_D 	Parents: NULL & NULL
+8 Name: enfant_ED_F 	Parents: enfant_AB_D & femme_D
+9 Name: enfant_ED_G 	Parents: enfant_AB_D & femme_D
+10 Name: femme_G 	Parents: NULL & NULL
+11 Name: enfant_GH_I 	Parents: enfant_ED_G & femme_G
 
 ==SHOW PART==
 A ------- B
@@ -75,12 +75,12 @@ A ------- B
        ( enfant_GH_I ) )  enfant_AB_J ) 
 
 ==SEARCH PART==
-, "," enfant_GH_I
+enfant_CC
 
 ==GLOBAL SEARCH PART==
 ROOT MEMBER: A
 ROOT MEMBER: B
-, "," enfant_ED_G
+enfant_ED_G
 ```
 
 ## Graphviz rendering (w.r.t 2 root members)
