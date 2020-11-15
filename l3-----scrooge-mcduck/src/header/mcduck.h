@@ -15,10 +15,10 @@ struct duck {
 };
 
 /*!
- * fonction permettant de créer un canard
- * \param name le prenom du canard
- * \param firstName le nom de famille du canard
- * \param surname le surnom porté par le canard
+ * fonction permettant de créer un duck
+ * \param name le prenom du duck
+ * \param firstName le nom de famille du duck
+ * \param surname le surnom porté par le duck
  * \return un carnard
 */
 Duck create_duck(char*, char*, char*);

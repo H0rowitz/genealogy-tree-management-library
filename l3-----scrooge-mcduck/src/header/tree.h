@@ -19,15 +19,15 @@ struct tree {
 
 /*!
  * fonction permettant d'initialiser un arbre
- * \param canard
+ * \param _ objet de type générique 
 */
 Tree init_tree(void*);
 
 /**
- * permet de rejouter un frère ou une soeur à un canard quelconque non root 
+ * permet de rejouter un frère ou une soeur à un duck quelconque non root 
  * \param tree
- * \param already_child
- * \param the_fake_present soeur/frère nouvellement né(e)
+ * \param already_child de type générique 
+ * \param the_fake_present soeur/frère nouvellement né(e) de type générique 
 */
 void add_sibling(Tree, void*, void*); 
 
@@ -59,16 +59,18 @@ gen_t getMemberByAttributs(Tree, void*);
 /*!
  * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
  * et les /!\ frères et soeurs /!\ d'un noeud donné
- * \param tree le canard à partir duquel on commence la recherche
- * \param canard 
+ * \param tree le duck à partir duquel on commence la recherche
+ * \param duck 
  * \param function la fonction de recherche 
+ * \param duck recherché  
 */
 void* search(Tree, void*, bool(*)(void*,void*),void*);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param tree  
- * \param canard le canard à partir duquel on commence à afficher la descendance
+ * \param func de display 
+ * \param duck à partir duquel on commence à afficher la descendance
 */
 void show(Tree, char*(*)(void*), void*);
 
@@ -76,7 +78,8 @@ void show(Tree, char*(*)(void*), void*);
  * fonction permettant de detruire une descendance à partir 
  * d'un noeud
  * \param tree 
- * \param canard le canard à partir duquel on commence à détruire la déscendance (root)
+ * \param func de destruction d'objet de type générique
+ * \param duck à partir duquel on commence à détruire la déscendance (root)
 */
 void delete_from_node(Tree, void(*)(void*), void*); 
 
@@ -84,16 +87,26 @@ void delete_from_node(Tree, void(*)(void*), void*);
  * Global search :
  * 1) Up getting to root, condition: root has no parents 
  * 2) Down getting to node 
+ * \param tree 
+ * \param duck à partir duquel on cherche 
+ * \param func_str fonction de display et conversion en chaîne de caractères 
+ * \param func_search fonction recherche 
+ * \param func de comparaison 
+ * \param duck que l'on cherche 
 */
 void* global_search(Tree, void*, char*(*)(void*), bool(*)(void*), bool(*)(void*,void*), void*); 
 
 /**
  * generate a .dot file to format a graph of the tree 
+ * \param tree
+ * \param func fonction de display et conversion en chaîne de caractères 
 */
 void create_graph_viz(Tree, char*(*)(void*));
 
 /**
  * std out the structure of the tree 
+ * \param tree
+ * \param func fonction de display et conversion en chaîne de caractères 
 */
 void display_tree_structure(Tree, char*(*)(void*));
 

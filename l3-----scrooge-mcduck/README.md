@@ -8,7 +8,7 @@ Une manière simple de gérer des arbres est de considérer un ensemble de **noe
 La connaissance du premier enfant suffit : les autres seront ses frère ou soeur. 
 
 Par souci de simplicité, il est demandé de considérer uniquement des arbres avec familles monogames, éventuellement mono-parentales, et sans familles recomposées. 
-Afin de limiter les problèmes de genre, nous vous proposons de ~~[collectionner](https://www.youtube.com/watch?v=RoFeLaROdtk)~~ considérer des canards (certes genrés, mais notoirement moins susceptibles que l'espèce humaine). 
+Afin de limiter les problèmes de genre, nous vous proposons de ~~[collectionner](https://www.youtube.com/watch?v=RoFeLaROdtk)~~ considérer des ducks (certes genrés, mais notoirement moins susceptibles que l'espèce humaine). 
 
 L'exemple ci-dessous représente un des arbres généalogiques les plus intéressants qui soit. Les origines du clan [McDuck](https://en.wikipedia.org/wiki/Duck_family_(Disney)) sont cependant douteuses.
 En effet, l'apparition de la descendance des Sir n'est pas clairement établie, et ces derniers seront donc laissés de côté dans le fichier de test que nous vous fournirons. 
