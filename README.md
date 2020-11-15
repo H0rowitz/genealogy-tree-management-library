@@ -66,7 +66,11 @@ at the begining of the file.
 8 Name: enfant_GH_I		Parents: enfant_ED_G & femme_G
 
 ==SHOW PART==
-A (enfant_AB_C, enfant_AB_D (enfant_ED_F, enfant_ED_G (enfant_GH_I)))
+A ------- B
+ (enfant_AB_C ------- femme_C
+   ( enfant_CC ) enfant_AB_D ------- femme_D
+     ( enfant_ED_F , enfant_ED_G ------- femme_G
+       ( enfant_GH_I ) )  enfant_AB_J ) 
 
 ==SEARCH PART==
 , "," enfant_GH_I

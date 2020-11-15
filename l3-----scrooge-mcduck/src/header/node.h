@@ -73,7 +73,7 @@ void _delete_from_node(gen_t);
  * 2) Down getting to node 
  *  // Ne pas rester bloqué dans un root local (sub_root): 
  *         - repasse par un enfant si bloqué 
- *         - atteind parents[not(i)]
+ *         - atteint parents[not(i)]
  * \param tree 
  * \param duck à partir duquel on cherche 
  * \param searchRoot 
