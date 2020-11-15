@@ -58,25 +58,25 @@ gen_t getMemberByAttributs(Tree, Duck);
 
 /*!
  * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
- * et les /!\ frères et soeur /!\ d'un noeud donner
- * \param tree le canard a partir du qu'elle on commence la recherche
+ * et les /!\ frères et soeurs /!\ d'un noeud donné
+ * \param tree le canard à partir duquel on commence la recherche
  * \param canard 
- * \param function la fonction de recherche TODO 
+ * \param function la fonction de recherche 
 */
 Duck search(Tree, Duck, bool(*)(void*,void*),Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
  * \param tree  
- * \param canard le canard a partir du qu'elle on commence a afficher la descendance
+ * \param canard le canard à partir duquel on commence à afficher la descendance
 */
 void show(Tree, Duck);
 
 /*!
- * fonction permettant de detruire une descendance a partir 
- * d'un noeud idéal après avoir ragé sur fortnite
+ * fonction permettant de detruire une descendance à partir 
+ * d'un noeud
  * \param tree 
- * \param canard le canard a partir duquel on commence à détruire la déscendance (root)
+ * \param canard le canard à partir duquel on commence à détruire la déscendance (root)
 */
 void delete_from_node(Tree, Duck); 
 

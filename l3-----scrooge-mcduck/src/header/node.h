@@ -32,24 +32,24 @@ gen_t create_node(Duck);
 void _addSibling(gen_t, Duck);
 
 /*!
- * fonction permettant d'ajouter un enfant a un couple de canard
+ * fonction permettant d'ajouter un enfant à un couple de canard
  * \param canard1 parent n°1
  * \param canard2 parent n°2
- * \param canard3 l'enfant a ajouter
+ * \param canard3 l'enfant à ajouter
 */
 void _addChild(gen_t, gen_t, gen_t);
 
 /*!
- * fonction permettant de marrier 2 canard (noeud de l'arbre)
- * \param canard1 le canard a marrier n°1
- * \param canard2 le canard a marrier n°2
+ * fonction permettant de marier 2 canards (noeud de l'arbre)
+ * \param canard1 le canard à marrier n°1
+ * \param canard2 le canard à marrier n°2
 */
 void _the_wedding_present(gen_t, gen_t);
 
 /*!
- * fonction permettant de rechercher un noeud dans l'arbre parmis les descendant
- * et les /!\ frères et soeur /!\ d'un noeud donner
- * \param canard à partir du qu'elle on commence la recherche
+ * fonction permettant de rechercher un noeud dans l'arbre parmis les descendants
+ * et les /!\ frères et soeurs /!\ d'un noeud donné
+ * \param canard à partir duquel on commence la recherche
  * \param function de recherche TODO 
  * \param canard que l'on cherche 
 */
@@ -57,13 +57,13 @@ Duck _search(gen_t, bool(*)(void*,void*), Duck);
 
 /*!
  * fonction permettant d'afficher la descendance d'un noeud d'un arbre
- * \param canard le canard a partir du qu'elle on commence a afficher la descendance
+ * \param canard le canard à partir duquel on commence à afficher la descendance
 */
 void _show(gen_t, int);
 
 /*!
- * fonction permettant de detruire une descendance a partir d'un noeud idéal après avoir rager sur fortnite
- * \param canard le canard a partir du qu'elle on commence a detruire la descendance
+ * fonction permettant de detruire une descendance à partir d'un noeud
+ * \param canard le canard a partir duquel on commence à detruire la descendance
 */
 void _delete_from_node(gen_t);
 
@@ -83,7 +83,7 @@ void _delete_from_node(gen_t);
 Duck _global_search(gen_t, bool(*)(void*), bool(*)(void*,void*), Duck);
 
 /*!
- * fonction permettant de savoir si un canard ne possède pas de parent
+ * fonction permettant de savoir si un canard ne possède pas de parent(s)
  * \param canard le canard sur lequel on veut obtenir l'information des parents
 */
 bool _is_orphelin(gen_t);

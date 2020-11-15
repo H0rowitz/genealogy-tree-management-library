@@ -15,7 +15,7 @@ struct duck {
 };
 
 /*!
- * fonction permettant de crée un canard
+ * fonction permettant de créer un canard
  * \param name le prenom du canard
  * \param firstName le nom de famille du canard
  * \param surname le surnom porté par le canard
