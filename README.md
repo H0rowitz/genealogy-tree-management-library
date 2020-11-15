@@ -52,6 +52,8 @@ typedef family_member gen_t;
 ```
 at the begining of the file.
 
+Important : généricité non traitée de manière exhaustive car partielle en C (!= cpp templates). 
+
 ### Current output of the main() function:
 ```bash
 ==STRUCTURE OF THE TREE==
