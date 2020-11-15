@@ -12,10 +12,12 @@ Tree init_tree(void* data) {
     return newTree;
 } 
 
-/*
- * On as fait le choix de passer la méthode en static
- * car cela ajouter trop de fonctions en parametre et donc rendez le code
- * illisible pour l'utilisateur
+/* 
+ * Nous avons privilégié la lisibilité sur 
+ * la fonctionnalité absolue de la généricité.
+ * La fonction is_same() aurait pu être passée 
+ * en paramètre et donc éviter de freeze 
+ * les comparaisons entre objets de type générique.
 */
 gen_t getMemberByAttributs(Tree tree, void* data) {
     for(size_t i = 0; i < tree->nbNode; ++i) {

@@ -12,7 +12,7 @@ Duck create_duck(char* name, char* firstname, char* surname){
 void display_duck(void* md) {
     Duck tmp = (Duck)md;
     strcmp(tmp->surname,"") == 0 ? printf("%s %s\t", tmp->firstname, tmp->name) : 
-    printf("%s", tmp->name);
+    printf("%s\n", tmp->name);
 }
 
 char* to_string_duck(void* duck) {
