@@ -54,17 +54,17 @@ Important : généricité non traitée de manière exhaustive car partielle en C
 ### Current output of the main() function:
 ```bash
 ==STRUCTURE OF THE TREE==
-0 Name: A 	          Parents: NULL & NULL
-1 Name: B 	          Parents: NULL & NULL
+0 Name: A 	         Parents: NULL & NULL
+1 Name: B 	         Parents: NULL & NULL
 2 Name: enfant_AB_C 	Parents: A & B
 3 Name: enfant_AB_D 	Parents: A & B
 4 Name: enfant_AB_J 	Parents: A & B
-5 Name: femme_C 	    Parents: NULL & NULL
+5 Name: femme_C 	   Parents: NULL & NULL
 6 Name: enfant_CC 	  Parents: femme_C & enfant_AB_C
-7 Name: femme_D 	    Parents: NULL & NULL
+7 Name: femme_D 	   Parents: NULL & NULL
 8 Name: enfant_ED_F 	Parents: enfant_AB_D & femme_D
 9 Name: enfant_ED_G 	Parents: enfant_AB_D & femme_D
-10 Name: femme_G 	    Parents: NULL & NULL
+10 Name: femme_G 	   Parents: NULL & NULL
 11 Name: enfant_GH_I 	Parents: enfant_ED_G & femme_G
 
 ==SHOW PART==
