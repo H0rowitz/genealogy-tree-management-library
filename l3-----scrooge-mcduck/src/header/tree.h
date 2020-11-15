@@ -93,7 +93,7 @@ Duck global_search(Tree, Duck, bool(*)(void*), bool(*)(void*,void*), Duck);
 void create_graph_viz(Tree);
 
 /**
- * output the structure of the tree 
+ * std out the structure of the tree 
 */
 void display_tree_structure(Tree);
 
